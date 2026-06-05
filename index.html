@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -241,10 +240,12 @@ footer .container { display: flex; justify-content: center; align-items: center;
   .pcard.featured { padding: 1.8rem; }
   .about-grid, .academy-grid { grid-template-columns: 1fr; gap: 3rem; }
   /* Collapse sidebar into compact 2-col grid on mobile */
-  .about-grid > div:last-child { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--gray-10); align-items: stretch; }
-  .aside-block { margin: 0; padding: 1.1rem; border: none; border-bottom: 1px solid var(--gray-10); border-right: 1px solid var(--gray-10); display: flex; flex-direction: column; }
-  .aside-block:nth-child(even) { border-right: none; }
-  .aside-block:nth-last-child(-n+2) { border-bottom: none; }
+  .about-grid > div:last-child { display: flex; flex-direction: column; gap: 0; border: 1px solid var(--gray-10); }
+  .aside-block { margin: 0; padding: 0.9rem 1.1rem; border: none; border-bottom: 1px solid var(--gray-10); display: flex; align-items: baseline; gap: 1rem; flex-wrap: wrap; }
+  .aside-block:last-child { border-bottom: none; margin: 0; padding: 0.9rem 1.1rem; }
+  .aside-label { font-size: 0.58rem; margin-bottom: 0; min-width: 80px; flex-shrink: 0; }
+  .aside-value { font-size: 0.82rem; line-height: 1.6; color: var(--black); }
+  .aside-block:nth-child(3), .aside-block:nth-child(4) { min-height: unset; }
   .aside-label { font-size: 0.58rem; margin-bottom: 0.5rem; }
   .aside-value { font-size: 0.8rem; line-height: 1.6; }
   .academy-stats { grid-template-columns: repeat(2, 1fr); }
