@@ -1,1 +1,659 @@
-<h1>Hello</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Altis Jessie Niño Dulay — Python Specialist & Educator</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;800&family=DM+Mono:wght@300;400;500&family=Instrument+Serif:ital@0;1&family=Syne:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Mono palette */
+  --black:   #0a0a0a;
+  --gray-90: #1a1a1a;
+  --gray-80: #2e2e2e;
+  --gray-60: #555;
+  --gray-40: #8a8a8a;
+  --gray-20: #c4c4c4;
+  --gray-10: #e8e8e8;
+  --gray-05: #f2f2f2;
+  --white:   #fafafa;
+  /* Orange accents */
+  --orange:  #e05c1a;
+  --orange-dim: rgba(224,92,26,0.12);
+  --orange-border: rgba(224,92,26,0.3);
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: 'Syne', sans-serif; background: var(--white); color: var(--black); line-height: 1.6; overflow-x: hidden; }
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+  background: var(--white); border-bottom: 1px solid var(--gray-10);
+  height: 56px; display: flex; align-items: center; justify-content: space-between;
+  padding: 0 max(2rem, calc((100% - 1100px) / 2));
+}
+.nav-logo { font-family: 'DM Mono', monospace; font-size: 0.72rem; color: var(--gray-40); letter-spacing: 0.12em; text-transform: uppercase; }
+.nav-links { display: flex; gap: 2rem; list-style: none; }
+.nav-links a { font-size: 0.76rem; font-weight: 600; letter-spacing: 0.08em; color: var(--gray-60); text-decoration: none; text-transform: uppercase; transition: color 0.2s; }
+.nav-links a:hover { color: var(--orange); }
+/* Hamburger */
+.nav-burger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; background: none; border: none; }
+.nav-burger span { display: block; width: 22px; height: 2px; background: var(--black); transition: all 0.3s; }
+.nav-burger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.nav-burger.open span:nth-child(2) { opacity: 0; }
+.nav-burger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.nav-mobile-menu {
+  display: none; position: fixed; top: 56px; left: 0; right: 0; z-index: 199;
+  background: var(--white); border-bottom: 1px solid var(--gray-10);
+  padding: 1.5rem max(2rem, calc((100% - 1100px) / 2));
+  flex-direction: column; gap: 1.2rem;
+}
+.nav-mobile-menu.open { display: flex; }
+.nav-mobile-menu a { font-size: 0.9rem; font-weight: 600; letter-spacing: 0.08em; color: var(--gray-60); text-decoration: none; text-transform: uppercase; }
+
+/* ── CONTAINER ── */
+.container { max-width: 1100px; margin: 0 auto; padding: 0 2rem; }
+
+/* ── HERO ── */
+.hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; padding-top: 56px; }
+.hero-left {
+  padding: 7rem 3rem 4rem max(2rem, calc((100vw - 1100px) / 2 + 2rem));
+  display: flex; flex-direction: column; justify-content: center;
+  border-right: 1px solid var(--gray-10);
+}
+.hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--gray-40); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.8rem; display: flex; align-items: center; gap: 1rem; }
+.hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--orange); }
+.hero-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(4rem, 8vw, 8.5rem); font-weight: 800; line-height: 0.92; letter-spacing: -0.01em; margin-bottom: 0.7rem; text-transform: uppercase; }
+.hero-subtitle { font-family: 'Instrument Serif', serif; font-size: clamp(1rem, 1.8vw, 1.35rem); font-style: italic; color: var(--orange); margin-bottom: 2.2rem; }
+.hero-desc { font-size: 0.96rem; color: var(--gray-60); max-width: 380px; line-height: 1.8; margin-bottom: 2.8rem; }
+.hero-stats { display: flex; gap: 2.5rem; }
+.stat-num { font-family: 'Instrument Serif', serif; font-size: 2.2rem; color: var(--black); line-height: 1; }
+.stat-num span { color: var(--orange); }
+.stat-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--gray-40); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.3rem; }
+
+.hero-right {
+  padding: 7rem max(2rem, calc((100vw - 1100px) / 2 + 2rem)) 4rem 3rem;
+  display: flex; flex-direction: column; justify-content: center; gap: 0.75rem;
+}
+.skill-row {
+  display: flex; align-items: center; gap: 1rem; padding: 0.9rem 1.2rem;
+  border: 1px solid var(--gray-10); background: var(--gray-05);
+  transition: all 0.22s; cursor: default;
+  animation: fadeSlide 0.5s ease both;
+}
+.skill-row:nth-child(1){animation-delay:.05s}.skill-row:nth-child(2){animation-delay:.12s}.skill-row:nth-child(3){animation-delay:.19s}.skill-row:nth-child(4){animation-delay:.26s}.skill-row:nth-child(5){animation-delay:.33s}.skill-row:nth-child(6){animation-delay:.4s}.skill-row:nth-child(7){animation-delay:.47s}
+.skill-row:hover { background: var(--black); border-color: var(--black); }
+.skill-row:hover .skill-name { color: var(--white); }
+.skill-row:hover .skill-level { color: var(--gray-40); }
+.skill-row:hover .s-svg { stroke: var(--gray-40); }
+.s-svg { width: 17px; height: 17px; flex-shrink: 0; stroke: var(--gray-40); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.22s; }
+.skill-name { font-size: 0.84rem; font-weight: 600; color: var(--black); flex: 1; letter-spacing: 0.02em; transition: color 0.22s; }
+.skill-level { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--gray-40); letter-spacing: 0.07em; transition: color 0.22s; }
+@keyframes fadeSlide { from { opacity:0; transform:translateX(18px); } to { opacity:1; transform:translateX(0); } }
+
+/* ── SECTIONS ── */
+.section { padding: 7rem 0; }
+.section-alt { background: var(--gray-05); }
+.section-dark { background: var(--black); color: var(--white); }
+.section-header { display: flex; align-items: flex-end; gap: 1.8rem; margin-bottom: 4rem; padding-bottom: 1.8rem; border-bottom: 1px solid var(--gray-10); }
+.section-dark .section-header { border-color: var(--gray-80); }
+.s-num { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--gray-40); letter-spacing: 0.15em; text-transform: uppercase; padding-bottom: 0.15rem; }
+.s-title { font-family: 'Instrument Serif', serif; font-size: clamp(1.9rem, 3.2vw, 2.8rem); font-weight: 400; line-height: 1.1; }
+.s-title em { font-style: italic; color: var(--orange); }
+.section-dark .s-title { color: var(--white); }
+
+/* ── PROJECTS ── */
+.projects-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--gray-10); border: 1px solid var(--gray-10); }
+.pcard { background: var(--white); padding: 2.2rem; position: relative; overflow: hidden; transition: background 0.25s; }
+.pcard::after { content: ''; position: absolute; top:0; left:0; width:3px; height:100%; background: var(--orange); transform: scaleY(0); transform-origin: bottom; transition: transform 0.28s ease; }
+.pcard:hover::after { transform: scaleY(1); }
+.pcard:hover { background: var(--gray-05); }
+.pcard-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.2rem; gap: 1rem; }
+.pcard-num { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--gray-40); letter-spacing: 0.12em; }
+.pcard-badge { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--white); background: var(--black); padding: 0.28rem 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; flex-shrink: 0; }
+.pcard-title { font-family: 'Instrument Serif', serif; font-size: 1.5rem; font-weight: 400; line-height: 1.15; margin-bottom: 0.7rem; }
+.pcard-client { font-family: 'DM Mono', monospace; font-size: 0.64rem; color: var(--gray-40); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.pcard-client::before { content: ''; display: inline-block; width: 16px; height: 1px; background: var(--gray-20); }
+.pcard-desc { font-size: 0.88rem; color: var(--gray-60); line-height: 1.72; margin-bottom: 1.6rem; }
+.impact-box { background: var(--gray-05); border-left: 3px solid var(--orange); padding: 0.9rem 1.1rem; margin-bottom: 1.5rem; }
+.impact-label { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--orange); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.4rem; }
+.impact-text { font-size: 0.86rem; color: var(--black); line-height: 1.6; font-weight: 600; }
+.impact-hl { font-family: 'Instrument Serif', serif; font-size: 1.15rem; color: var(--orange); font-style: italic; }
+.tech-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+.tech-tag { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--gray-60); background: var(--gray-05); border: 1px solid var(--gray-10); padding: 0.28rem 0.65rem; letter-spacing: 0.06em; text-transform: uppercase; }
+
+/* FEATURED CARD */
+.pcard.featured { grid-column: 1 / -1; display: grid; grid-template-columns: 1.4fr 1fr; gap: 3rem; align-items: start; padding: 3rem; background: var(--black); color: var(--white); }
+.pcard.featured .pcard-title { font-size: 2rem; color: var(--white); }
+.pcard.featured .pcard-desc { color: var(--gray-40); }
+.pcard.featured .pcard-client { color: var(--gray-60); }
+.pcard.featured .pcard-client::before { background: var(--gray-80); }
+.pcard.featured .pcard-badge { background: var(--orange); color: var(--white); }
+.pcard.featured .impact-box { background: var(--gray-90); border-color: var(--orange); }
+.pcard.featured .impact-text { color: var(--white); }
+.pcard.featured .tech-tag { background: var(--gray-90); border-color: var(--gray-80); color: var(--gray-40); }
+.pcard.featured::after { display: none; }
+.pcard.featured:hover { background: var(--gray-90); }
+
+/* File tree inside featured */
+.file-tree { background: var(--gray-90); border: 1px solid var(--gray-80); padding: 1.5rem; margin-bottom: 1.2rem; font-family: 'DM Mono', monospace; font-size: 0.72rem; line-height: 2; color: var(--gray-40); }
+.file-tree-title { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-60); margin-bottom: 0.8rem; }
+.ft-folder { color: var(--gray-20); font-weight: 500; }
+.ft-file { color: var(--gray-60); }
+.ft-file.hl { color: var(--orange); }
+.ft-desc { color: var(--gray-80); font-size: 0.65rem; }
+
+.bot-flow { background: var(--gray-90); padding: 1.4rem; font-family: 'DM Mono', monospace; font-size: 0.7rem; color: #6fd69a; line-height: 1.9; }
+.bot-flow-comment { color: var(--gray-80); }
+
+/* ── ACADEMY ── */
+.academy-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 5rem; align-items: start; margin-bottom: 5rem; }
+.academy-pill { display: inline-flex; align-items: center; gap: 0.6rem; border: 1px solid var(--gray-10); padding: 0.4rem 0.9rem; margin-bottom: 1.6rem; }
+.academy-pill-dot { width: 7px; height: 7px; background: var(--orange); border-radius: 50%; }
+.academy-pill-text { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--gray-40); letter-spacing: 0.12em; text-transform: uppercase; }
+.academy-heading { font-family: 'Instrument Serif', serif; font-size: clamp(2.2rem, 3.5vw, 3.4rem); font-weight: 400; line-height: 1.12; margin-bottom: 1.4rem; }
+.academy-heading em { font-style: italic; color: var(--orange); }
+.academy-body { font-size: 0.96rem; color: var(--gray-60); line-height: 1.82; margin-bottom: 1.2rem; }
+
+/* Timeline — fixed alignment */
+.timeline { display: flex; flex-direction: column; }
+.tl-item { display: grid; grid-template-columns: 56px 1fr; gap: 1.2rem; padding: 1.4rem 0; border-bottom: 1px solid var(--gray-10); }
+.tl-item:first-child { padding-top: 0; }
+.tl-item:last-child { border-bottom: none; }
+.tl-year { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--orange); letter-spacing: 0.06em; font-weight: 500; padding-top: 0.18rem; white-space: nowrap; }
+.tl-body {}
+.tl-title { font-size: 0.9rem; font-weight: 700; color: var(--black); margin-bottom: 0.25rem; }
+.tl-desc { font-size: 0.82rem; color: var(--gray-40); line-height: 1.6; }
+
+/* Academy stats */
+.academy-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--gray-10); border: 1px solid var(--gray-10); margin-bottom: 4rem; }
+.astat { background: var(--white); padding: 1.8rem 1.4rem; text-align: center; }
+.astat-num { font-family: 'Instrument Serif', serif; font-size: 2.8rem; color: var(--black); line-height: 1; margin-bottom: 0.4rem; }
+.astat-num span { color: var(--orange); }
+.astat-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--gray-40); letter-spacing: 0.1em; text-transform: uppercase; }
+
+/* Courses */
+.courses-label { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--gray-40); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 1.2rem; }
+.courses-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1px; background: var(--gray-10); border: 1px solid var(--gray-10); }
+.ccard { background: var(--white); padding: 1.8rem; display: flex; gap: 1.2rem; align-items: flex-start; transition: all 0.22s; }
+.ccard:hover { background: var(--black); }
+.ccard:hover .ccard-title, .ccard:hover .ccard-meta { color: var(--white); }
+.ccard:hover .ccard-tag { color: var(--orange); background: var(--orange-dim); border-color: var(--orange-border); }
+.ccard:hover .c-svg { stroke: var(--gray-60); }
+.ccard:hover .ccard-icon-wrap { border-color: var(--gray-80); background: var(--gray-90); }
+.ccard-icon-wrap { width: 38px; height: 38px; border: 1px solid var(--gray-10); display: flex; align-items: center; justify-content: center; flex-shrink: 0; background: var(--gray-05); transition: all 0.22s; }
+.c-svg { width: 18px; height: 18px; stroke: var(--gray-40); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; transition: stroke 0.22s; }
+.ccard-title { font-size: 0.94rem; font-weight: 700; color: var(--black); margin-bottom: 0.3rem; transition: color 0.22s; }
+.ccard-meta { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--gray-40); letter-spacing: 0.07em; margin-bottom: 0.7rem; transition: color 0.22s; }
+.ccard-tag { display: inline-block; font-family: 'DM Mono', monospace; font-size: 0.56rem; color: var(--gray-60); background: var(--gray-05); border: 1px solid var(--gray-10); padding: 0.22rem 0.55rem; letter-spacing: 0.08em; text-transform: uppercase; transition: all 0.22s; }
+
+/* ── ABOUT ── */
+.about-grid { display: grid; grid-template-columns: 2fr 1fr; gap: 5rem; align-items: start; }
+.about-prose { font-family: 'Instrument Serif', serif; font-size: 1.28rem; line-height: 1.82; color: var(--gray-60); }
+.about-prose strong { color: var(--black); font-weight: 400; }
+.about-prose em { color: var(--orange); font-style: italic; }
+.about-prose p + p { margin-top: 1.4rem; }
+.aside-block { margin-bottom: 2.2rem; padding-bottom: 2.2rem; border-bottom: 1px solid var(--gray-10); }
+.aside-block:last-child { border: none; margin: 0; padding: 0; }
+.aside-label { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--gray-40); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 0.9rem; }
+.aside-value { font-size: 0.88rem; color: var(--black); line-height: 1.75; }
+
+/* ── CONTACT ── */
+.contact-inner { text-align: center; position: relative; overflow: hidden; padding: 5rem 0; }
+.contact-inner::before { content: 'BUILD'; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); font-family: 'Instrument Serif', serif; font-size: 26vw; color: rgba(255,255,255,0.03); white-space: nowrap; pointer-events: none; line-height: 1; }
+.c-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--gray-60); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 1.4rem; position: relative; }
+.c-heading { font-family: 'Instrument Serif', serif; font-size: clamp(2.4rem, 5vw, 4.2rem); font-weight: 400; line-height: 1.1; margin-bottom: 2.5rem; position: relative; }
+.c-heading em { font-style: italic; color: var(--orange); }
+.c-btn { display: inline-flex; align-items: center; gap: 0.9rem; background: var(--white); color: var(--black); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.82rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 1rem 2.2rem; transition: background 0.22s, color 0.22s; position: relative; }
+.c-btn:hover { background: var(--orange); color: var(--white); }
+.c-btn::after { content: '→'; }
+
+/* ── FOOTER ── */
+footer { background: var(--gray-90); border-top: 1px solid var(--gray-80); padding: 1.8rem 0; }
+footer .container { display: flex; justify-content: center; align-items: center; }
+.footer-copy { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--gray-60); letter-spacing: 0.08em; text-align: center; }
+
+/* ── REVEAL ── */
+.reveal { opacity:0; transform:translateY(24px); transition:opacity 0.55s ease, transform 0.55s ease; }
+.reveal.visible { opacity:1; transform:translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 900px) {
+  .nav-links { display: none; }
+  .nav-burger { display: flex; }
+  .hero { grid-template-columns: 1fr; min-height: unset; }
+  .hero-left { border-right: none; border-bottom: 1px solid var(--gray-10); padding: 4rem 1.5rem 2.5rem; min-height: unset; }
+  .hero-right { padding: 2rem 1.5rem 3rem; gap: 0.6rem; }
+  .hero-title { font-size: clamp(3.2rem, 13vw, 5rem); }
+  .hero-desc { max-width: 100%; font-size: 0.92rem; margin-bottom: 2rem; }
+  .hero-stats { gap: 2rem; }
+  .stat-num { font-size: 1.9rem; }
+  .projects-grid { grid-template-columns: 1fr; }
+  .courses-grid { grid-template-columns: 1fr; }
+  .pcard.featured { grid-template-columns: 1fr; }
+  .pcard { padding: 1.6rem; }
+  .pcard.featured { padding: 1.8rem; }
+  .about-grid, .academy-grid { grid-template-columns: 1fr; gap: 3rem; }
+  /* Collapse sidebar into compact 2-col grid on mobile */
+  .about-grid > div:last-child { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--gray-10); align-items: stretch; }
+  .aside-block { margin: 0; padding: 1.1rem; border: none; border-bottom: 1px solid var(--gray-10); border-right: 1px solid var(--gray-10); display: flex; flex-direction: column; }
+  .aside-block:nth-child(even) { border-right: none; }
+  .aside-block:nth-last-child(-n+2) { border-bottom: none; }
+  .aside-label { font-size: 0.58rem; margin-bottom: 0.5rem; }
+  .aside-value { font-size: 0.8rem; line-height: 1.6; }
+  .academy-stats { grid-template-columns: repeat(2, 1fr); }
+  .about-prose { font-size: 1.1rem; }
+  .section { padding: 4rem 0; }
+  .section-header { margin-bottom: 2.5rem; }
+}
+@media (max-width: 480px) {
+  .hero-left { padding: 3.5rem 1.2rem 2rem; }
+  .hero-right { padding: 1.5rem 1.2rem 2.5rem; }
+  .hero-stats { gap: 1.5rem; }
+  .academy-stats { grid-template-columns: repeat(2, 1fr); }
+  .container { padding: 0 1.2rem; }
+  .skill-row { padding: 0.8rem 1rem; }
+  .pcard { padding: 1.4rem; }
+  .astat-num { font-size: 2.2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <span class="nav-logo">Altis Dulay</span>
+  <ul class="nav-links">
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#academy">AltSys Academy</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="nav-burger" id="burger" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile-menu" id="mobileMenu">
+  <a href="#projects" class="mob-link">Projects</a>
+  <a href="#academy" class="mob-link">AltSys Academy</a>
+  <a href="#about" class="mob-link">About</a>
+  <a href="#contact" class="mob-link">Contact</a>
+</div>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">Available for Work</div>
+    <h1 class="hero-title">Altis Jessie<br>Niño Dulay</h1>
+    <p class="hero-subtitle">Python Specialist &amp; Educator</p>
+    <p class="hero-desc">I build automation systems that eliminate repetitive work — and I teach others to do the same. 6+ years focused on Python automation. Most clients are under NDA. Founder of AltSys Academy — 1,000+ students trained.</p>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">6<span>+</span></div>
+        <div class="stat-label">Years in Python</div>
+      </div>
+      <div>
+        <div class="stat-num">1K<span>+</span></div>
+        <div class="stat-label">Students Taught</div>
+      </div>
+      <div>
+        <div class="stat-num">7<span>+</span></div>
+        <div class="stat-label">Projects Shipped</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="skill-row">
+      <svg class="s-svg" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+      <span class="skill-name">Python 3.x</span><span class="skill-level">6+ Years</span>
+    </div>
+    <div class="skill-row">
+      <svg class="s-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+      <span class="skill-name">Process Automation</span><span class="skill-level">Core Focus</span>
+    </div>
+    <div class="skill-row">
+      <svg class="s-svg" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+      <span class="skill-name">Email Automation</span><span class="skill-level">Advanced</span>
+    </div>
+    <div class="skill-row">
+      <svg class="s-svg" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+      <span class="skill-name">Web Scraping (Selenium)</span><span class="skill-level">Advanced</span>
+    </div>
+    <div class="skill-row">
+      <svg class="s-svg" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+      <span class="skill-name">Data Processing (Pandas)</span><span class="skill-level">Proficient</span>
+    </div>
+    <div class="skill-row">
+      <svg class="s-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+      <span class="skill-name">REST API Integration</span><span class="skill-level">Advanced</span>
+    </div>
+    <div class="skill-row">
+      <svg class="s-svg" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg>
+      <span class="skill-name">Database Handling (SQLite)</span><span class="skill-level">Proficient</span>
+    </div>
+  </div>
+</div>
+
+<!-- PROJECTS -->
+<div id="projects" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="s-num">01</div>
+      <h2 class="s-title">Selected <em>Work</em></h2>
+    </div>
+    <p style="font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--gray-40);letter-spacing:0.08em;margin-bottom:2.5rem;padding-left:0.2rem;">
+      <span style="display:inline-block;width:8px;height:8px;background:var(--orange);border-radius:50%;margin-right:0.6rem;vertical-align:middle;"></span>
+      Most clients and projects are under NDA. Names and companies are withheld unless permission was granted.
+    </p>
+
+      <!-- FEATURED: Shopify Monitor -->
+      <div class="pcard featured reveal">
+        <div>
+          <div class="pcard-top">
+            <span class="pcard-num">001</span>
+            <span class="pcard-badge">Featured Project</span>
+          </div>
+          <h3 class="pcard-title">Shopify Discount Deal Monitor</h3>
+          <div class="pcard-client">Glenalla Group</div>
+          <p class="pcard-desc">Real-time product monitoring bot built for Glenalla Group to automatically detect discounted deals and price drops across Shopify stores. The system continuously polls product endpoints, diffs variant states using JSON comparison, and fires Slack webhook alerts the moment a deal appears — giving the team a significant purchasing advantage. Active for nearly 2 years, it directly saved the company substantial procurement costs by enabling instant deal capture that was previously missed.</p>
+          <div class="impact-box">
+            <div class="impact-label">Business Impact</div>
+            <div class="impact-text">Saved the company an estimated <span class="impact-hl">₱500K+ over ~2 years</span> in procurement costs by capturing discounted deals within seconds of appearing. Monitors 100+ products simultaneously with near-zero false positives.</div>
+          </div>
+          <div class="tech-tags">
+            <span class="tech-tag">Python</span><span class="tech-tag">Requests</span><span class="tech-tag">JSON</span><span class="tech-tag">SQLite</span><span class="tech-tag">Slack Webhooks</span><span class="tech-tag">Proxy Rotation</span><span class="tech-tag">User-Agent Rotation</span><span class="tech-tag">dotenv</span><span class="tech-tag">jsondiff</span><span class="tech-tag">Logging</span>
+          </div>
+        </div>
+        <div>
+          <div class="file-tree">
+            <div class="file-tree-title">Project Structure</div>
+            <div><span class="ft-folder">GlenallaShopifyMonitor/</span></div>
+            <div>&nbsp;├── <span class="ft-file hl">monitor_handle.py</span> <span class="ft-desc">— core polling &amp; diff engine</span></div>
+            <div>&nbsp;├── <span class="ft-file hl">monitor_bot.py</span> <span class="ft-desc">— variant checker &amp; Slack alerts</span></div>
+            <div>&nbsp;├── <span class="ft-file hl">database_handle.py</span> <span class="ft-desc">— SQLite state persistence</span></div>
+            <div>&nbsp;├── <span class="ft-file hl">scheduled_jobs.py</span> <span class="ft-desc">— polling scheduler</span></div>
+            <div>&nbsp;├── <span class="ft-file">config.py</span> <span class="ft-desc">— channels &amp; credentials</span></div>
+            <div>&nbsp;├── <span class="ft-file">requirements.txt</span></div>
+            <div>&nbsp;└── <span class="ft-file">.env</span> <span class="ft-desc">— secrets (excluded)</span></div>
+          </div>
+          <div class="bot-flow">
+            <div class="bot-flow-comment"># Detection pipeline</div>
+            <div>poll_product_endpoint()</div>
+            <div>→ diff_variant_states()</div>
+            <div>→ detect_price_drop()</div>
+            <div>→ identify_deal_size()</div>
+            <div>→ fire_slack_alert()</div>
+            <div>→ persist_to_sqlite()</div>
+            <div>→ rotate_proxy()</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 002 Pre-Employment Email -->
+      <div class="pcard reveal">
+        <div class="pcard-top"><span class="pcard-num">002</span><span class="pcard-badge">HR Automation</span></div>
+        <h3 class="pcard-title">Pre-Employment Email Automation</h3>
+        <div class="pcard-client">Confidential Client</div>
+        <p class="pcard-desc">End-to-end automation of the pre-employment onboarding email workflow. Reads a source spreadsheet, routes each candidate to the correct HTML email template and PDF attachment set based on their site assignment, then dispatches everything via SendGrid on a scheduled timer. Generates daily summary reports and auto-backs up source data.</p>
+        <div class="impact-box">
+          <div class="impact-label">Business Impact</div>
+          <div class="impact-text">Eliminated <span class="impact-hl">~6 hrs/day</span> of manual email prep across 5 sites. Near-zero human error on attachment selection.</div>
+        </div>
+        <div class="tech-tags">
+          <span class="tech-tag">Python</span><span class="tech-tag">SendGrid API</span><span class="tech-tag">Jinja2</span><span class="tech-tag">Pandas</span><span class="tech-tag">Schedule</span><span class="tech-tag">openpyxl</span><span class="tech-tag">HTML Email</span><span class="tech-tag">dotenv</span>
+        </div>
+      </div>
+
+      <!-- 003 Hiring Probation -->
+      <div class="pcard reveal">
+        <div class="pcard-top"><span class="pcard-num">003</span><span class="pcard-badge">HR Automation</span></div>
+        <h3 class="pcard-title">Hiring & Probation Reminder System</h3>
+        <div class="pcard-client">Confidential Client</div>
+        <p class="pcard-desc">Automated reminder engine that monitors employee probation timelines and triggers date-sensitive email notifications to HR teams. Handles both regular and fixed-term employment types with separate scheduling logic. Maintains detailed logs for audit compliance.</p>
+        <div class="impact-box">
+          <div class="impact-label">Business Impact</div>
+          <div class="impact-text">Reduced missed probation deadlines to <span class="impact-hl">zero</span>. Saved ~2 hrs/week tracking timelines across hundreds of active employee records.</div>
+        </div>
+        <div class="tech-tags">
+          <span class="tech-tag">Python</span><span class="tech-tag">SendGrid API</span><span class="tech-tag">Schedule</span><span class="tech-tag">datetime</span><span class="tech-tag">logging</span><span class="tech-tag">CSV</span>
+        </div>
+      </div>
+
+      <!-- 004 RM Scheduler -->
+      <div class="pcard reveal">
+        <div class="pcard-top"><span class="pcard-num">004</span><span class="pcard-badge">Enterprise Tool</span></div>
+        <h3 class="pcard-title">Release Management Scheduler</h3>
+        <div class="pcard-client">Confidential Client</div>
+        <p class="pcard-desc">Automated scheduling tool that connects to a ServiceNow REST API and Outlook Calendar via COM automation. Fetches change requests, filters by type and exclusion rules, and builds structured daily/overnight change schedules. Compiled into a standalone Windows executable for non-technical end users.</p>
+        <div class="impact-box">
+          <div class="impact-label">Business Impact</div>
+          <div class="impact-text">Replaced a <span class="impact-hl">3-hour manual process</span> with a single-click tool. Zero copy-paste errors in change schedule distribution.</div>
+        </div>
+        <div class="tech-tags">
+          <span class="tech-tag">Python</span><span class="tech-tag">REST API</span><span class="tech-tag">ServiceNow API</span><span class="tech-tag">Win32com</span><span class="tech-tag">Outlook COM</span><span class="tech-tag">PyInstaller</span><span class="tech-tag">JSON</span>
+        </div>
+      </div>
+
+      <!-- 005 Status Scraper -->
+      <div class="pcard reveal">
+        <div class="pcard-top"><span class="pcard-num">005</span><span class="pcard-badge">Web Scraping</span></div>
+        <h3 class="pcard-title">Retail Portal Status Scraper</h3>
+        <div class="pcard-client">Confidential Client</div>
+        <p class="pcard-desc">Selenium-based scraper that logs into an authenticated retail portal, navigates multi-frame pages, and extracts unpaid and researching invoice statuses across hundreds of EDI records. Automates data export to Excel, replacing tedious manual portal navigation.</p>
+        <div class="impact-box">
+          <div class="impact-label">Business Impact</div>
+          <div class="impact-text">Reduced invoice status lookup from <span class="impact-hl">~4 hrs/day to under 15 min</span>. Team handles 10× more records in the same timeframe.</div>
+        </div>
+        <div class="tech-tags">
+          <span class="tech-tag">Python</span><span class="tech-tag">Selenium</span><span class="tech-tag">Chrome WebDriver</span><span class="tech-tag">openpyxl</span><span class="tech-tag">threading</span><span class="tech-tag">JSON</span>
+        </div>
+      </div>
+
+      <!-- 006 SIOP -->
+      <div class="pcard reveal">
+        <div class="pcard-top"><span class="pcard-num">006</span><span class="pcard-badge">Data Processing</span></div>
+        <h3 class="pcard-title">SIOP Capacity Computation Engine</h3>
+        <div class="pcard-client">Confidential Client</div>
+        <p class="pcard-desc">SIOP computation tool built with Pandas. Automates capacity planning calculations: production plan vs. backlog comparisons, excess capacity allocation, shortage analysis, and inventory projections across multi-month horizons. Outputs structured DataFrame results for planning teams.</p>
+        <div class="impact-box">
+          <div class="impact-label">Business Impact</div>
+          <div class="impact-text">Replaced manual spreadsheet work with a <span class="impact-hl">reproducible pipeline</span>. Monthly planning cycle time reduced by ~40%.</div>
+        </div>
+        <div class="tech-tags">
+          <span class="tech-tag">Python</span><span class="tech-tag">Pandas</span><span class="tech-tag">NumPy</span><span class="tech-tag">openpyxl</span><span class="tech-tag">CSV</span>
+        </div>
+      </div>
+
+      <!-- 007 PDF Exporter -->
+      <div class="pcard reveal">
+        <div class="pcard-top"><span class="pcard-num">007</span><span class="pcard-badge">Document Automation</span></div>
+        <h3 class="pcard-title">Spreadsheet → PDF Batch Exporter</h3>
+        <div class="pcard-client">Confidential Client</div>
+        <p class="pcard-desc">Reads record IDs from a spreadsheet, authenticates into a web platform via Selenium, and batch-exports each record as a PDF. Handles multi-frame navigation and download completion detection — replacing tedious one-by-one manual exports across large change windows.</p>
+        <div class="impact-box">
+          <div class="impact-label">Business Impact</div>
+          <div class="impact-text">Turned a <span class="impact-hl">30-sec per-record task</span> into fully automated batch processing. Documentation prep cut from hours to minutes.</div>
+        </div>
+        <div class="tech-tags">
+          <span class="tech-tag">Python</span><span class="tech-tag">Selenium</span><span class="tech-tag">Chrome WebDriver</span><span class="tech-tag">openpyxl</span><span class="tech-tag">REST API</span><span class="tech-tag">JSON</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ALTSYS ACADEMY -->
+<div id="academy" class="section section-alt">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="s-num">02</div>
+      <h2 class="s-title">AltSys <em>Academy</em></h2>
+    </div>
+
+    <div class="academy-grid reveal">
+      <div>
+        <div class="academy-pill"><span class="academy-pill-dot"></span><span class="academy-pill-text">DTI &amp; BIR Registered · AltSys Learning Center</span></div>
+        <h3 class="academy-heading">Making coding<br><em>accessible for everyone</em></h3>
+        <p class="academy-body">What started in 2020 under the name <strong>Niño Dulay</strong> on Facebook — small group sessions gathered from developer communities — became AltSys Academy by 2024, a fully DTI and BIR registered learning center.</p>
+        <p class="academy-body">My mission has always been simple: make coding education affordable and accessible. I offer low-budget courses without cutting corners on quality, teaching the same skills I use daily in real production systems. Not just Python — I want to open doors to coding for anyone who wants to learn.</p>
+        <p class="academy-body">Over 1,000 students across 20+ batches. Every course is hands-on, project-based, and built from real-world experience.</p>
+      </div>
+
+      <div class="timeline">
+        <div class="tl-item">
+          <div class="tl-year">2020</div>
+          <div class="tl-body">
+            <div class="tl-title">Started Teaching Under "Niño Dulay"</div>
+            <div class="tl-desc">Small informal groups recruited from Facebook developer communities. Python Fundamentals first batch, fully remote and affordable.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2021</div>
+          <div class="tl-body">
+            <div class="tl-title">Expanded Course Lineup</div>
+            <div class="tl-desc">Added SQL Mastery. Multiple batches running per year, averaging 20+ students each with a focus on keeping costs low.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2023</div>
+          <div class="tl-body">
+            <div class="tl-title">Growing Community</div>
+            <div class="tl-desc">Continued growth under the personal brand. Python Intermediate track introduced. 500+ students trained by end of year.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">2024</div>
+          <div class="tl-body">
+            <div class="tl-title">AltSys Learning Center — Officially Registered</div>
+            <div class="tl-desc">Registered with DTI &amp; BIR as AltSys Learning Center. Launched Python API Development course. 1,000+ students milestone reached.</div>
+          </div>
+        </div>
+        <div class="tl-item">
+          <div class="tl-year">Now</div>
+          <div class="tl-body">
+            <div class="tl-title">Ongoing &amp; Growing</div>
+            <div class="tl-desc">All courses running with new batches enrolling regularly. Still committed to affordable, accessible coding education.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="academy-stats reveal">
+      <div class="astat"><div class="astat-num">1K<span>+</span></div><div class="astat-label">Students Trained</div></div>
+      <div class="astat"><div class="astat-num">20<span>+</span></div><div class="astat-label">Batches Completed</div></div>
+      <div class="astat"><div class="astat-num">4</div><div class="astat-label">Active Courses</div></div>
+      <div class="astat"><div class="astat-num">6<span>+</span></div><div class="astat-label">Years Teaching</div></div>
+    </div>
+
+    <div class="courses-label reveal">Course Offerings</div>
+    <div class="courses-grid reveal">
+      <div class="ccard">
+        <div class="ccard-icon-wrap"><svg class="c-svg" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+        <div><div class="ccard-title">Python Fundamentals</div><div class="ccard-meta">14 Batches · Ongoing</div><span class="ccard-tag">Most Popular</span></div>
+      </div>
+      <div class="ccard">
+        <div class="ccard-icon-wrap"><svg class="c-svg" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+        <div><div class="ccard-title">Python Intermediate</div><div class="ccard-meta">1 Batch · Ongoing</div><span class="ccard-tag">New</span></div>
+      </div>
+      <div class="ccard">
+        <div class="ccard-icon-wrap"><svg class="c-svg" viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div>
+        <div><div class="ccard-title">Python API Development</div><div class="ccard-meta">2 Batches · Ongoing</div><span class="ccard-tag">Advanced</span></div>
+      </div>
+      <div class="ccard">
+        <div class="ccard-icon-wrap"><svg class="c-svg" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+        <div><div class="ccard-title">SQL Mastery</div><div class="ccard-meta">5 Batches · Ongoing</div><span class="ccard-tag">Popular</span></div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- ABOUT -->
+<div id="about" class="section">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="s-num">03</div>
+      <h2 class="s-title">About <em>Me</em></h2>
+    </div>
+    <div class="about-grid">
+      <div class="reveal">
+        <div class="about-prose">
+          <p>I'm <strong>Altis Jessie Niño Dulay</strong> — a Python automation specialist and founder of <em>AltSys Academy</em>, based in the Philippines.</p>
+          <p>I've spent 6+ years focused exclusively on Python automation — building tools that eliminate repetitive, error-prone manual work across HR, operations, e-commerce, and data workflows. <em>Most of my automation clients and projects are under NDA</em> — the work shown here represents what I'm able to share publicly. Every system I build is deployed into real production environments, used by real teams daily.</p>
+          <p>Outside client work, I run <em>AltSys Learning Center</em> — a DTI and BIR registered coding school. I started teaching in 2020 because I believe coding education should be accessible and affordable for everyone. Over 1,000 students trained and counting.</p>
+        </div>
+      </div>
+      <div class="reveal">
+        <div class="aside-block">
+          <div class="aside-label">Roles</div>
+          <div class="aside-value">Python Automation Specialist<br>Founder, AltSys Academy<br>Python &amp; SQL Instructor</div>
+        </div>
+        <div class="aside-block">
+          <div class="aside-label">Focus Areas</div>
+          <div class="aside-value">Process Automation<br>Email &amp; Notification Pipelines<br>Web Scraping &amp; Bots<br>Data Processing</div>
+        </div>
+        <div class="aside-block">
+          <div class="aside-label">Stack</div>
+          <div class="aside-value">Python · Selenium · Pandas<br>SendGrid · SQLite · Jinja2<br>REST APIs · PyInstaller<br>Win32com · Slack API</div>
+        </div>
+        <div class="aside-block">
+          <div class="aside-label">Location</div>
+          <div class="aside-value">Philippines<br>Available Remote Worldwide</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- CONTACT -->
+<div id="contact" class="section section-dark">
+  <div class="container">
+    <div class="contact-inner">
+      <div class="c-eyebrow">04 — Let's Work Together</div>
+      <h2 class="c-heading">Got a process<br>worth <em>automating?</em></h2>
+      <a href="mailto:yourname@email.com" class="c-btn">Get In Touch</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <span class="footer-copy">© 2025 Altis Jessie Niño Dulay · AltSys Learning Center</span>
+  </div>
+</footer>
+
+<script>
+  // Scroll reveal
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.07 });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  // Mobile nav
+  const burger = document.getElementById('burger');
+  const menu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', () => {
+    burger.classList.toggle('open');
+    menu.classList.toggle('open');
+  });
+  document.querySelectorAll('.mob-link').forEach(link => {
+    link.addEventListener('click', () => {
+      burger.classList.remove('open');
+      menu.classList.remove('open');
+    });
+  });
+</script>
+</body>
+</html>
