@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -114,42 +115,42 @@ nav {
 .pcard:hover::after { transform: scaleY(1); }
 .pcard:hover { background: var(--gray-05); }
 .pcard-top { display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 1.2rem; gap: 1rem; }
-.pcard-num { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--gray-40); letter-spacing: 0.12em; }
-.pcard-badge { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--white); background: var(--black); padding: 0.28rem 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; flex-shrink: 0; }
-.pcard-title { font-family: 'Instrument Serif', serif; font-size: 1.5rem; font-weight: 400; line-height: 1.15; margin-bottom: 0.7rem; }
-.pcard-client { font-family: 'DM Mono', monospace; font-size: 0.64rem; color: var(--gray-40); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
+.pcard-num { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--gray-40); letter-spacing: 0.12em; }
+.pcard-badge { font-family: 'DM Mono', monospace; font-size: 0.64rem; color: var(--white); background: var(--black); padding: 0.28rem 0.65rem; letter-spacing: 0.08em; text-transform: uppercase; flex-shrink: 0; }
+.pcard-title { font-family: 'Instrument Serif', serif; font-size: 1.7rem; font-weight: 400; line-height: 1.15; margin-bottom: 0.7rem; }
+.pcard-client { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--gray-40); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem; }
 .pcard-client::before { content: ''; display: inline-block; width: 16px; height: 1px; background: var(--gray-20); }
-.pcard-desc { font-size: 0.88rem; color: var(--gray-60); line-height: 1.72; margin-bottom: 1.6rem; }
+.pcard-desc { font-size: 0.97rem; color: var(--gray-80); line-height: 1.72; margin-bottom: 1.6rem; }
 .impact-box { background: var(--gray-05); border-left: 3px solid var(--orange); padding: 0.9rem 1.1rem; margin-bottom: 1.5rem; }
-.impact-label { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--orange); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.4rem; }
-.impact-text { font-size: 0.86rem; color: var(--black); line-height: 1.6; font-weight: 600; }
-.impact-hl { font-family: 'Instrument Serif', serif; font-size: 1.15rem; color: var(--orange); font-style: italic; }
+.impact-label { font-family: 'DM Mono', monospace; font-size: 0.63rem; color: var(--orange); letter-spacing: 0.15em; text-transform: uppercase; margin-bottom: 0.4rem; }
+.impact-text { font-size: 0.96rem; color: var(--black); line-height: 1.6; font-weight: 600; }
+.impact-hl { font-family: 'Instrument Serif', serif; font-size: 1.25rem; color: var(--orange); font-style: italic; }
 .tech-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
-.tech-tag { font-family: 'DM Mono', monospace; font-size: 0.58rem; color: var(--gray-60); background: var(--gray-05); border: 1px solid var(--gray-10); padding: 0.28rem 0.65rem; letter-spacing: 0.06em; text-transform: uppercase; }
+.tech-tag { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--gray-60); background: var(--gray-05); border: 1px solid var(--gray-10); padding: 0.28rem 0.65rem; letter-spacing: 0.06em; text-transform: uppercase; }
 
 /* FEATURED CARD */
 .pcard.featured { grid-column: 1 / -1; display: grid; grid-template-columns: 1.4fr 1fr; gap: 3rem; align-items: start; padding: 3rem; background: var(--black); color: var(--white); }
 .pcard.featured .pcard-title { font-size: 2rem; color: var(--white); }
-.pcard.featured .pcard-desc { color: var(--gray-40); }
-.pcard.featured .pcard-client { color: var(--gray-60); }
+.pcard.featured .pcard-desc { color: var(--gray-20); }
+.pcard.featured .pcard-client { color: var(--gray-40); }
 .pcard.featured .pcard-client::before { background: var(--gray-80); }
 .pcard.featured .pcard-badge { background: var(--orange); color: var(--white); }
 .pcard.featured .impact-box { background: var(--gray-90); border-color: var(--orange); }
 .pcard.featured .impact-text { color: var(--white); }
-.pcard.featured .tech-tag { background: var(--gray-90); border-color: var(--gray-80); color: var(--gray-40); }
+.pcard.featured .tech-tag { background: var(--gray-80); border-color: var(--gray-60); color: var(--gray-20); }
 .pcard.featured::after { display: none; }
 .pcard.featured:hover { background: var(--gray-90); }
 
 /* File tree inside featured */
-.file-tree { background: var(--gray-90); border: 1px solid var(--gray-80); padding: 1.5rem; margin-bottom: 1.2rem; font-family: 'DM Mono', monospace; font-size: 0.72rem; line-height: 2; color: var(--gray-40); }
+.file-tree { background: var(--gray-90); border: 1px solid var(--gray-80); padding: 1.5rem; margin-bottom: 1.2rem; font-family: 'DM Mono', monospace; font-size: 0.75rem; line-height: 2; color: var(--gray-20); }
 .file-tree-title { font-size: 0.6rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gray-60); margin-bottom: 0.8rem; }
 .ft-folder { color: var(--gray-20); font-weight: 500; }
-.ft-file { color: var(--gray-60); }
+.ft-file { color: var(--gray-40); }
 .ft-file.hl { color: var(--orange); }
-.ft-desc { color: var(--gray-80); font-size: 0.65rem; }
+.ft-desc { color: var(--gray-60); font-size: 0.68rem; }
 
-.bot-flow { background: var(--gray-90); padding: 1.4rem; font-family: 'DM Mono', monospace; font-size: 0.7rem; color: #6fd69a; line-height: 1.9; }
-.bot-flow-comment { color: var(--gray-80); }
+.bot-flow { background: var(--gray-90); padding: 1.4rem; font-family: 'DM Mono', monospace; font-size: 0.76rem; color: #7ee8a8; line-height: 1.9; }
+.bot-flow-comment { color: var(--gray-60); }
 
 /* ── ACADEMY ── */
 .academy-grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: 5rem; align-items: start; margin-bottom: 5rem; }
@@ -158,7 +159,7 @@ nav {
 .academy-pill-text { font-family: 'DM Mono', monospace; font-size: 0.62rem; color: var(--gray-40); letter-spacing: 0.12em; text-transform: uppercase; }
 .academy-heading { font-family: 'Instrument Serif', serif; font-size: clamp(2.2rem, 3.5vw, 3.4rem); font-weight: 400; line-height: 1.12; margin-bottom: 1.4rem; }
 .academy-heading em { font-style: italic; color: var(--orange); }
-.academy-body { font-size: 0.96rem; color: var(--gray-60); line-height: 1.82; margin-bottom: 1.2rem; }
+.academy-body { font-size: 1rem; color: var(--gray-80); line-height: 1.82; margin-bottom: 1.2rem; }
 
 /* Timeline — fixed alignment */
 .timeline { display: flex; flex-direction: column; }
@@ -168,7 +169,7 @@ nav {
 .tl-year { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--orange); letter-spacing: 0.06em; font-weight: 500; padding-top: 0.18rem; white-space: nowrap; }
 .tl-body {}
 .tl-title { font-size: 0.9rem; font-weight: 700; color: var(--black); margin-bottom: 0.25rem; }
-.tl-desc { font-size: 0.82rem; color: var(--gray-40); line-height: 1.6; }
+.tl-desc { font-size: 0.88rem; color: var(--gray-60); line-height: 1.65; }
 
 /* Academy stats */
 .academy-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px; background: var(--gray-10); border: 1px solid var(--gray-10); margin-bottom: 4rem; }
