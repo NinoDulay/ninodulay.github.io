@@ -66,6 +66,7 @@ nav {
   display: flex; flex-direction: column; justify-content: center;
   border-right: 1px solid var(--gray-10);
 }
+
 .hero-eyebrow { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--gray-40); letter-spacing: 0.16em; text-transform: uppercase; margin-bottom: 1.8rem; display: flex; align-items: center; gap: 1rem; }
 .hero-eyebrow::before { content: ''; display: block; width: 28px; height: 1px; background: var(--orange); }
 .hero-title { font-family: 'Barlow Condensed', sans-serif; font-size: clamp(4rem, 8vw, 8.5rem); font-weight: 800; line-height: 0.92; letter-spacing: -0.01em; margin-bottom: 0.7rem; text-transform: uppercase; }
@@ -77,8 +78,8 @@ nav {
 .stat-label { font-family: 'DM Mono', monospace; font-size: 0.6rem; color: var(--gray-40); text-transform: uppercase; letter-spacing: 0.1em; margin-top: 0.3rem; }
 
 .hero-right {
-  padding: 7rem max(2rem, calc((100vw - 1100px) / 2 + 2rem)) 4rem 3rem;
-  display: flex; flex-direction: column; justify-content: center; gap: 0.75rem;
+  padding: 4rem max(2rem, calc((100vw - 1100px) / 2 + 2rem)) 4rem 2rem;
+  display: flex; flex-direction: column; justify-content: center; gap: 0.65rem;
 }
 .skill-row {
   display: flex; align-items: center; gap: 1rem; padding: 0.9rem 1.2rem;
@@ -218,6 +219,189 @@ footer { background: var(--gray-90); border-top: 1px solid var(--gray-80); paddi
 footer .container { display: flex; justify-content: center; align-items: center; }
 .footer-copy { font-family: 'DM Mono', monospace; font-size: 0.65rem; color: var(--gray-60); letter-spacing: 0.08em; text-align: center; }
 
+
+
+
+/* OPEN-TO */
+.open-to { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 2rem; }
+.open-to-dot { width: 7px; height: 7px; background: #22c55e; border-radius: 50%; flex-shrink: 0; animation: pulse-dot 2s infinite; }
+@keyframes pulse-dot { 0%,100%{box-shadow:0 0 0 0 rgba(34,197,94,0.4)} 50%{box-shadow:0 0 0 5px rgba(34,197,94,0)} }
+.open-to-text { font-family: 'DM Mono', monospace; font-size: 0.68rem; color: var(--gray-60); letter-spacing: 0.08em; }
+
+/* STICKY SECTION INDICATOR */
+.section-dots { position: fixed; right: 1.5rem; top: 50%; transform: translateY(-50%); z-index: 99; display: flex; flex-direction: column; gap: 0.75rem; }
+.s-dot { width: 7px; height: 7px; border-radius: 50%; border: 1.5px solid var(--gray-40); background: transparent; cursor: pointer; transition: all 0.25s; display: block; }
+.s-dot.active { background: var(--orange); border-color: var(--orange); transform: scale(1.3); }
+.s-dot:hover { border-color: var(--orange); }
+
+/* ACTIVE NAV */
+.nav-links a.active { color: var(--orange); }
+
+/* ENROLL BTN */
+.enroll-btn { display: inline-flex; align-items: center; gap: 0.7rem; background: var(--black); color: var(--white); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 0.8rem; letter-spacing: 0.1em; text-transform: uppercase; text-decoration: none; padding: 0.9rem 2rem; margin-top: 2rem; transition: all 0.22s; }
+.enroll-btn:hover { background: var(--orange); }
+.enroll-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+
+@media (max-width: 900px) {
+  .section-dots { display: none; }
+
+}
+
+
+
+
+
+/* ── TESTIMONIALS ── */
+.tsection { padding: 7rem 0; background: var(--white); }
+.tgrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: auto;
+  gap: 1px;
+  background: var(--gray-10);
+  border: 1px solid var(--gray-10);
+  overflow: hidden;
+  transition: max-height 0.7s cubic-bezier(0.4,0,0.2,1);
+  position: relative;
+}
+.tgrid.expanded { max-height: 9000px; }
+.tgrid-fade {
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 200px;
+  background: linear-gradient(to bottom, transparent, #fafafa);
+  pointer-events: none;
+  transition: opacity 0.4s;
+  z-index: 2;
+}
+.tgrid.expanded .tgrid-fade { opacity: 0; }
+
+/* Uniform grid — no spanning to prevent empty boxes */
+
+
+.tc {
+  background: var(--white);
+  padding: 1.6rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: default;
+  transition: background 0.22s;
+  border: none;
+}
+.tc:hover { background: var(--black); }
+.tc:hover .tc-quote { color: var(--gray-20); }
+.tc:hover .tc-name { color: var(--white); }
+.tc:hover .tc-meta { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.4rem; }
+.tc-date {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--gray-40);
+  letter-spacing: 0.08em;
+  transition: color 0.22s;
+}
+.tc:hover .tc-date { color: var(--gray-60); }
+.REMOVED_tc-course { color: var(--gray-60); border-color: var(--gray-80); }
+.tc:hover .tc-mark { color: var(--orange); }
+
+.tc-mark {
+  font-family: 'Instrument Serif', serif;
+  font-size: 3rem;
+  line-height: 0.8;
+  color: var(--orange);
+  margin-bottom: 0.8rem;
+  transition: color 0.22s;
+}
+.tc-big .tc-mark { font-size: 4rem; }
+
+.tc-quote {
+  font-family: 'Instrument Serif', serif;
+  font-size: 0.95rem;
+  line-height: 1.65;
+  color: var(--gray-80);
+  flex: 1;
+  transition: color 0.22s;
+}
+.tc-big .tc-quote { font-size: 1.15rem; line-height: 1.7; }
+.tc-wide .tc-quote { font-size: 1rem; }
+
+.tc-footer { margin-top: 1.2rem; }
+.tc-name {
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--black);
+  letter-spacing: 0.03em;
+  transition: color 0.22s;
+}
+.tc-meta { display: flex; align-items: center; gap: 0.6rem; margin-top: 0.4rem; }
+.tc-date {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.6rem;
+  color: var(--gray-40);
+  letter-spacing: 0.08em;
+  transition: color 0.22s;
+}
+.tc:hover .tc-date { color: var(--gray-60); }
+.REMOVED_tc-course {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.58rem;
+  color: var(--gray-40);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-top: 0.3rem;
+  display: inline-block;
+  border: 1px solid var(--gray-10);
+  padding: 0.2rem 0.5rem;
+  transition: all 0.22s;
+}
+
+.tgrid-toggle {
+  display: block;
+  margin: 1.8rem auto 0;
+  font-family: 'DM Mono', monospace;
+  font-size: 0.72rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--black);
+  background: none;
+  border: 1px solid var(--gray-20);
+  padding: 0.8rem 2.2rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.tgrid-toggle:hover { background: var(--black); color: var(--white); border-color: var(--black); }
+
+@media (max-width: 900px) {
+  .tgrid { grid-template-columns: repeat(2, 1fr); }
+  .tc-big, 
+}
+@media (max-width: 480px) {
+  .tgrid { grid-template-columns: 1fr; }
+  .tc-big, .tc-wide { grid-column: span 1; }
+}
+
+
+/* Filter tabs */
+.tfilter {
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 2rem;
+}
+.tf {
+  font-family: 'DM Mono', monospace;
+  font-size: 0.65rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.5rem 1.1rem;
+  border: 1px solid var(--gray-20);
+  background: none;
+  color: var(--gray-60);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.tf:hover { border-color: var(--black); color: var(--black); }
+.tf.active { background: var(--black); color: var(--white); border-color: var(--black); }
+
 /* ── REVEAL ── */
 .reveal { opacity:0; transform:translateY(24px); transition:opacity 0.55s ease, transform 0.55s ease; }
 .reveal.visible { opacity:1; transform:translateY(0); }
@@ -227,7 +411,7 @@ footer .container { display: flex; justify-content: center; align-items: center;
   .nav-links { display: none; }
   .nav-burger { display: flex; }
   .hero { grid-template-columns: 1fr; min-height: unset; }
-  .hero-left { border-right: none; border-bottom: 1px solid var(--gray-10); padding: 4rem 1.5rem 2.5rem; min-height: unset; }
+  .hero-left { border-right: none; border-bottom: 1px solid var(--gray-10); padding: 3rem 1.5rem 2.5rem; min-height: unset; }
   .hero-right { padding: 2rem 1.5rem 3rem; gap: 0.6rem; }
   .hero-title { font-size: clamp(3.2rem, 13vw, 5rem); }
   .hero-desc { max-width: 100%; font-size: 0.92rem; margin-bottom: 2rem; }
@@ -290,9 +474,13 @@ footer .container { display: flex; justify-content: center; align-items: center;
 <!-- HERO -->
 <div class="hero">
   <div class="hero-left">
-    <div class="hero-eyebrow">Available for Work</div>
+    <div class="hero-eyebrow">Portfolio</div>
     <h1 class="hero-title">Altis Jessie<br>Niño Dulay</h1>
     <p class="hero-subtitle">Python Specialist &amp; Educator</p>
+    <div class="open-to">
+      <span class="open-to-dot"></span>
+      <span class="open-to-text">Open to: Automation Projects &amp; 1-on-1 Tutorials</span>
+    </div>
     <p class="hero-desc">I build automation systems that eliminate repetitive work — and I teach others to do the same. 6+ years focused on Python automation. Most clients are under NDA. Founder of AltSys Academy — 1,000+ students trained.</p>
     <div class="hero-stats">
       <div>
@@ -361,8 +549,8 @@ footer .container { display: flex; justify-content: center; align-items: center;
             <span class="pcard-badge">Featured Project</span>
           </div>
           <h3 class="pcard-title">Shopify Discount Deal Monitor</h3>
-          <div class="pcard-client">Glenalla Group</div>
-          <p class="pcard-desc">Real-time product monitoring bot built for Glenalla Group to automatically detect discounted deals and price drops across Shopify stores. The system continuously polls product endpoints, diffs variant states using JSON comparison, and fires Slack webhook alerts the moment a deal appears — giving the team a significant purchasing advantage. Active for nearly 2 years, it directly saved the company substantial procurement costs by enabling instant deal capture that was previously missed.</p>
+          <div class="pcard-client">E-Commerce Client</div>
+          <p class="pcard-desc">I built a Python bot that monitors multiple Shopify store links by fetching their product JSON endpoints at regular intervals. It uses jsondiff to compare the latest product data against what was previously saved in SQLite — the moment a price drop or discount is detected, it fires an alert straight to a Slack channel via webhook. Ran continuously for nearly 2 years and saved the company a significant amount by catching deals in seconds that would have otherwise been missed.</p>
           <div class="impact-box">
             <div class="impact-label">Business Impact</div>
             <div class="impact-text">Saved the company an estimated <span class="impact-hl">₱500K+ over ~2 years</span> in procurement costs by capturing discounted deals within seconds of appearing. Monitors 100+ products simultaneously with near-zero false positives.</div>
@@ -375,23 +563,23 @@ footer .container { display: flex; justify-content: center; align-items: center;
           <div class="file-tree">
             <div class="file-tree-title">Project Structure</div>
             <div><span class="ft-folder">GlenallaShopifyMonitor/</span></div>
-            <div>&nbsp;├── <span class="ft-file hl">monitor_handle.py</span> <span class="ft-desc">— core polling &amp; diff engine</span></div>
-            <div>&nbsp;├── <span class="ft-file hl">monitor_bot.py</span> <span class="ft-desc">— variant checker &amp; Slack alerts</span></div>
-            <div>&nbsp;├── <span class="ft-file hl">database_handle.py</span> <span class="ft-desc">— SQLite state persistence</span></div>
-            <div>&nbsp;├── <span class="ft-file hl">scheduled_jobs.py</span> <span class="ft-desc">— polling scheduler</span></div>
-            <div>&nbsp;├── <span class="ft-file">config.py</span> <span class="ft-desc">— channels &amp; credentials</span></div>
+            <div>&nbsp;├── <span class="ft-file hl">monitor_handle.py</span> <span class="ft-desc">— watches products &amp; detects changes</span></div>
+            <div>&nbsp;├── <span class="ft-file hl">monitor_bot.py</span> <span class="ft-desc">— sends instant deal alerts</span></div>
+            <div>&nbsp;├── <span class="ft-file hl">database_handle.py</span> <span class="ft-desc">— remembers what was seen before</span></div>
+            <div>&nbsp;├── <span class="ft-file hl">scheduled_jobs.py</span> <span class="ft-desc">— runs checks on a schedule</span></div>
+            <div>&nbsp;├── <span class="ft-file">config.py</span> <span class="ft-desc">— configuration &amp; settings</span></div>
             <div>&nbsp;├── <span class="ft-file">requirements.txt</span></div>
             <div>&nbsp;└── <span class="ft-file">.env</span> <span class="ft-desc">— secrets (excluded)</span></div>
           </div>
           <div class="bot-flow">
             <div class="bot-flow-comment"># Detection pipeline</div>
-            <div>poll_product_endpoint()</div>
-            <div>→ diff_variant_states()</div>
-            <div>→ detect_price_drop()</div>
-            <div>→ identify_deal_size()</div>
-            <div>→ fire_slack_alert()</div>
-            <div>→ persist_to_sqlite()</div>
-            <div>→ rotate_proxy()</div>
+            <div>check_product_page()</div>
+            <div>→ compare_with_last_seen()</div>
+            <div>→ spot_the_deal()</div>
+            <div>→ calculate_savings()</div>
+            <div>→ send_alert_to_team()</div>
+            <div>→ save_for_next_check()</div>
+            <div>→ stay_undetected()</div>
           </div>
         </div>
       </div>
@@ -401,7 +589,7 @@ footer .container { display: flex; justify-content: center; align-items: center;
         <div class="pcard-top"><span class="pcard-num">002</span><span class="pcard-badge">HR Automation</span></div>
         <h3 class="pcard-title">Pre-Employment Email Automation</h3>
         <div class="pcard-client">Confidential Client</div>
-        <p class="pcard-desc">End-to-end automation of the pre-employment onboarding email workflow. Reads a source spreadsheet, routes each candidate to the correct HTML email template and PDF attachment set based on their site assignment, then dispatches everything via SendGrid on a scheduled timer. Generates daily summary reports and auto-backs up source data.</p>
+        <p class="pcard-desc">I built a Python automation that reads a list of new hires from an Excel file using openpyxl, then uses Jinja2 to render a personalized HTML email for each person with the correct onboarding documents attached. The tricky part was that there are 5 site locations — Location 1 through Location 5 — each with their own email template and set of PDF attachments, so the script automatically routes each hire to the right variant based on their assigned site. Emails are sent through the SendGrid API, and the whole thing runs automatically every day via the schedule library — no manual work needed. It also backs up the source file after each run.</p>
         <div class="impact-box">
           <div class="impact-label">Business Impact</div>
           <div class="impact-text">Eliminated <span class="impact-hl">~6 hrs/day</span> of manual email prep across 5 sites. Near-zero human error on attachment selection.</div>
@@ -416,7 +604,7 @@ footer .container { display: flex; justify-content: center; align-items: center;
         <div class="pcard-top"><span class="pcard-num">003</span><span class="pcard-badge">HR Automation</span></div>
         <h3 class="pcard-title">Hiring & Probation Reminder System</h3>
         <div class="pcard-client">Confidential Client</div>
-        <p class="pcard-desc">Automated reminder engine that monitors employee probation timelines and triggers date-sensitive email notifications to HR teams. Handles both regular and fixed-term employment types with separate scheduling logic. Maintains detailed logs for audit compliance.</p>
+        <p class="pcard-desc">I built a Python tool that reads employee records from a spreadsheet and uses Python's datetime library to calculate exactly when each person's probation review is due. When a deadline is approaching, it automatically sends a reminder email to HR via the SendGrid API. It handles both regular and fixed-term contract types with different deadline logic, and logs every email sent for audit purposes.</p>
         <div class="impact-box">
           <div class="impact-label">Business Impact</div>
           <div class="impact-text">Reduced missed probation deadlines to <span class="impact-hl">zero</span>. Saved ~2 hrs/week tracking timelines across hundreds of active employee records.</div>
@@ -431,7 +619,7 @@ footer .container { display: flex; justify-content: center; align-items: center;
         <div class="pcard-top"><span class="pcard-num">004</span><span class="pcard-badge">Enterprise Tool</span></div>
         <h3 class="pcard-title">Release Management Scheduler</h3>
         <div class="pcard-client">Confidential Client</div>
-        <p class="pcard-desc">Automated scheduling tool that connects to a ServiceNow REST API and Outlook Calendar via COM automation. Fetches change requests, filters by type and exclusion rules, and builds structured daily/overnight change schedules. Compiled into a standalone Windows executable for non-technical end users.</p>
+        <p class="pcard-desc">I built a Python tool that connects to the ServiceNow REST API to fetch open change requests, filters and organizes them into a daily schedule, then writes everything directly into Outlook Calendar using Win32com. Packaged the whole thing into a standalone .exe using PyInstaller so non-technical team members can run it with a double-click — no Python installation needed.</p>
         <div class="impact-box">
           <div class="impact-label">Business Impact</div>
           <div class="impact-text">Replaced a <span class="impact-hl">3-hour manual process</span> with a single-click tool. Zero copy-paste errors in change schedule distribution.</div>
@@ -444,9 +632,9 @@ footer .container { display: flex; justify-content: center; align-items: center;
       <!-- 005 Status Scraper -->
       <div class="pcard reveal">
         <div class="pcard-top"><span class="pcard-num">005</span><span class="pcard-badge">Web Scraping</span></div>
-        <h3 class="pcard-title">Retail Portal Status Scraper</h3>
+        <h3 class="pcard-title">Invoice Status Checker</h3>
         <div class="pcard-client">Confidential Client</div>
-        <p class="pcard-desc">Selenium-based scraper that logs into an authenticated retail portal, navigates multi-frame pages, and extracts unpaid and researching invoice statuses across hundreds of EDI records. Automates data export to Excel, replacing tedious manual portal navigation.</p>
+        <p class="pcard-desc">I built a Python script using Selenium and ChromeDriver to automate logging into an authenticated vendor portal. It navigates through multiple page frames, searches for each invoice, scrapes the payment status, and exports all results into an Excel file using openpyxl. Used threading to speed up the process across hundreds of records — what used to take most of the day now finishes in minutes.</p>
         <div class="impact-box">
           <div class="impact-label">Business Impact</div>
           <div class="impact-text">Reduced invoice status lookup from <span class="impact-hl">~4 hrs/day to under 15 min</span>. Team handles 10× more records in the same timeframe.</div>
@@ -459,9 +647,9 @@ footer .container { display: flex; justify-content: center; align-items: center;
       <!-- 006 SIOP -->
       <div class="pcard reveal">
         <div class="pcard-top"><span class="pcard-num">006</span><span class="pcard-badge">Data Processing</span></div>
-        <h3 class="pcard-title">SIOP Capacity Computation Engine</h3>
+        <h3 class="pcard-title">Operations Planning Calculator</h3>
         <div class="pcard-client">Confidential Client</div>
-        <p class="pcard-desc">SIOP computation tool built with Pandas. Automates capacity planning calculations: production plan vs. backlog comparisons, excess capacity allocation, shortage analysis, and inventory projections across multi-month horizons. Outputs structured DataFrame results for planning teams.</p>
+        <p class="pcard-desc">I built a Python tool using Pandas and NumPy to automate monthly capacity planning calculations. It reads raw production data from CSV and Excel files, computes backlog comparisons, capacity gaps, and multi-month inventory projections — calculations that previously took days of manual spreadsheet work. Results are exported back to Excel via openpyxl as a clean structured report.</p>
         <div class="impact-box">
           <div class="impact-label">Business Impact</div>
           <div class="impact-text">Replaced manual spreadsheet work with a <span class="impact-hl">reproducible pipeline</span>. Monthly planning cycle time reduced by ~40%.</div>
@@ -474,9 +662,9 @@ footer .container { display: flex; justify-content: center; align-items: center;
       <!-- 007 PDF Exporter -->
       <div class="pcard reveal">
         <div class="pcard-top"><span class="pcard-num">007</span><span class="pcard-badge">Document Automation</span></div>
-        <h3 class="pcard-title">Spreadsheet → PDF Batch Exporter</h3>
+        <h3 class="pcard-title">Bulk Document Exporter</h3>
         <div class="pcard-client">Confidential Client</div>
-        <p class="pcard-desc">Reads record IDs from a spreadsheet, authenticates into a web platform via Selenium, and batch-exports each record as a PDF. Handles multi-frame navigation and download completion detection — replacing tedious one-by-one manual exports across large change windows.</p>
+        <p class="pcard-desc">I built a Python script using Selenium and ChromeDriver to automate bulk PDF exports from ServiceNow. It reads a list of record IDs from an Excel file via openpyxl, logs into ServiceNow automatically, navigates to each record, triggers the PDF export, and waits for the download to complete before moving to the next. What used to take hours of manual clicking now runs completely unattended.</p>
         <div class="impact-box">
           <div class="impact-label">Business Impact</div>
           <div class="impact-text">Turned a <span class="impact-hl">30-sec per-record task</span> into fully automated batch processing. Documentation prep cut from hours to minutes.</div>
@@ -573,6 +761,1440 @@ footer .container { display: flex; justify-content: center; align-items: center;
       </div>
     </div>
 
+    <div class="reveal" style="text-align:center;padding-top:0.5rem;">
+      <a href="https://facebook.com/altsysacademy" target="_blank" class="enroll-btn">
+        <svg viewBox="0 0 24 24"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+        Enroll at AltSys Academy
+      </a>
+    </div>
+
+  </div>
+</div>
+
+
+  <button class="lb-next" onclick="event.stopPropagation();nextImg()">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+  </button>
+  <div class="lb-counter" id="lb-counter">1 / ...</div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div id="testimonials" class="section tsection">
+  <div class="container">
+    <div class="section-header reveal">
+      <div class="s-num">04</div>
+      <h2 class="s-title">What Students <em>Say</em></h2>
+    </div>
+    <p style="font-family:'DM Mono',monospace;font-size:0.68rem;color:var(--gray-40);letter-spacing:0.08em;margin-bottom:2rem;">
+      137 testimonials across AltSys Academy courses.
+    </p>
+    <div class="tfilter" id="tfilter">
+      <button class="tf active" data-filter="all" onclick="filterTestimonials(this)">All (137)</button>
+      <button class="tf" data-filter="pf" onclick="filterTestimonials(this)">Python Fundamentals (70)</button>
+      <button class="tf" data-filter="sql" onclick="filterTestimonials(this)">SQL Mastery (67)</button>
+    </div>
+  </div>
+  <div class="container">
+    <div class="tgrid" id="tgrid">
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Very informational and timely</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Wycliffe</div>
+          <div class="tc-meta"><span class="tc-date">Feb 16, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">AltSys Academy, salamat for giving us access to quality coding education na may malinaw at madaling maunawaan na mga explanation. Instructor Niño Dulay excels at making complex concepts simple and demonstrates great patience throughout the learning process. I have gained valuable knowledge, and I highly recommend this 10-day course. This is actually my second time, and it has been well worth it!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Marvin</div>
+          <div class="tc-meta"><span class="tc-date">Feb 16, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I’m on my road to a career change and found AltSys Academy at the right time. The way the course has been presented was to my liking. I give HIGH RECOMMENDATION to the PYTHON FUNDAMENTALS and my next to take up is the MySQL Mastery Course. Our very young and energetic instructor, Sir Nino Dulay, was not only skilled and knowledgeable but very patient and humble. Ang galing galing magturo. Well assisted by Ms. Raiza who is also very patient and accommodating to all our queries and needs. KUDOS ALTSYS ACADEMY!!! Fly high!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Charleen</div>
+          <div class="tc-meta"><span class="tc-date">Feb 16, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I had an excellent experience with your program! I learned a lot about Python programming, and the teacher&#39;s way of explaining concepts was clear and effective. The lessons were well structured, making it easy to understand even complex topics. I highly recommend this program to anyone looking to improve their coding skills!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Princess</div>
+          <div class="tc-meta"><span class="tc-date">Feb 16, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">This is a great learning experience! Our instructor is very knowledgeable and considerate, the tools we used in our classes are also effective. I learned a lot and I look forward for more Phyton courses. Thanks so much!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Christian</div>
+          <div class="tc-meta"><span class="tc-date">Feb 16, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The whole course is tranformative i can relate to the discussion to my actual work as an accountant</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Zander</div>
+          <div class="tc-meta"><span class="tc-date">Feb 16, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The Python fundamentals course was fun and exciting! Clear lessons, practical exercises, and Altis made everything easy to understand. I highly recommend it!!!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Andre</div>
+          <div class="tc-meta"><span class="tc-date">Feb 16, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The instructor is compassionate and understanding, and the discussions are clear and easy to follow.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Vincent</div>
+          <div class="tc-meta"><span class="tc-date">Feb 16, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Excellent Python course!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Isac</div>
+          <div class="tc-meta"><span class="tc-date">Feb 16, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">great for first time or beginner on programming</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Jose</div>
+          <div class="tc-meta"><span class="tc-date">Feb 16, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">This class has opened brand new opportunity for me to expand my field of expertise. I may be late to learn this but its better late than never. I learned a lot and should have used this to build a foundation in programming and learn more advanced skill in the future.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Carl</div>
+          <div class="tc-meta"><span class="tc-date">Feb 16, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The programming session was incredibly insightful and well-structured, making complex concepts easier to understand. It provided practical knowledge that I can apply directly to my studies and future projects.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Tommy</div>
+          <div class="tc-meta"><span class="tc-date">Feb 16, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">It was fun learning, keep it up po</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Donna</div>
+          <div class="tc-meta"><span class="tc-date">Feb 16, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I am extremely satisfied with my experience! The quality, attention to detail, and exceptional customer service truly set you apart. I highly recommend your services to anyone looking for reliability and excellence.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Rhic</div>
+          <div class="tc-meta"><span class="tc-date">Feb 17, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">his teaching is systematic. its experience with the subject is obvious. Good job and God bless.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Mael</div>
+          <div class="tc-meta"><span class="tc-date">Feb 17, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I wanted to learn other coding languages until I found AltSys. The sessions 1 to 10 were enjoyable and I learned a lot of things about Python. Overall, it was nice.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Jaf</div>
+          <div class="tc-meta"><span class="tc-date">Feb 17, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Professor Niño is very knowledgeable in handling Python and other programming classes. He has an amazing skills in this field, aside from he is very accommodating, engaging and very patient. Indeed, he is true to his words that learning programming doesn&#39;t need to be expensive coz every cent is worthy with his style of teaching!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Ismael</div>
+          <div class="tc-meta"><span class="tc-date">Feb 18, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Thankful and madami akong natutunan, experience wise yung instructor and hindi ka talaga iiwan or matatapos yung session na blanko or wala kang idea.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Russel</div>
+          <div class="tc-meta"><span class="tc-date">Feb 27, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Clear and madaling maintindihan ang lesson, gusto ko syang magturo ng iba pang programming language</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Joel</div>
+          <div class="tc-meta"><span class="tc-date">Mar 02, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Provided appropriate approach for the beginners and advanced.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Maria</div>
+          <div class="tc-meta"><span class="tc-date">Mar 02, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">For me as a beginner and like to explore new things, The classes are very interesting and it gave me new knowledge.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Cindyrella</div>
+          <div class="tc-meta"><span class="tc-date">Mar 03, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">It aligns in my lesson</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Kevin</div>
+          <div class="tc-meta"><span class="tc-date">Mar 22, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Thank you so much for the effort na magturo! You&#39;re the reason kung bakit natuto ako magcoding.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Kim</div>
+          <div class="tc-meta"><span class="tc-date">Jun 08, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Sulit ang bayad, marami kang matutunan.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Alfredo</div>
+          <div class="tc-meta"><span class="tc-date">Jun 08, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I have learned many codes that will help me in the future though I cant fully utilize it now I am still happy with what Ive learned so far</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Arwin</div>
+          <div class="tc-meta"><span class="tc-date">Jun 08, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Well at the beginning I never imagined I’d enjoy it this much till session 10. With Sir @Altis Jessie his clear explanations, practical examples, and supportive teaching style truly made a difference.
+If you&#39;re thinking about learning Python, I highly recommend starting with Sir @Altis Jessie. A great mentor .</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">George</div>
+          <div class="tc-meta"><span class="tc-date">Jun 08, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The course was enjoyable as well as informative because of Sir Altis&#39;s capturing style. Excellent presentation skills and plenty of chances to discuss real-world situations and ask questions made for an engaging and informative learning. My expectations have been exceeded by this.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Anna</div>
+          <div class="tc-meta"><span class="tc-date">Jun 08, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Highly recommended! had a great experience in learning python!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Roestel</div>
+          <div class="tc-meta"><span class="tc-date">Jun 08, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The coach was incredibly supportive, patiently addressing every challenge we encountered during the sessions. The assignments were highly relevant to the topics
+
+Even beginners with zero Python experience can confidently join. I highly recommend this training not just for its affordable pricing, but more importantly, for its outstanding quality. Thank you, Coach!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Sol</div>
+          <div class="tc-meta"><span class="tc-date">Jun 08, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">You&#39;re not losing your money and time enrolling in AltSys Academy Community PH. The trainer is taking overtime to show sincerity to his novices and to satisfy his teaching needs. You’re enrolling basic in Python, but the truth is you’re learning intermediate. Learning materials are no issue, all are provided for your lifetime references. The teaching strategy is much appreciated.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Ruben</div>
+          <div class="tc-meta"><span class="tc-date">Jun 08, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Was able to meet the expectation actually exceeds because of the real life examples</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Maricris</div>
+          <div class="tc-meta"><span class="tc-date">Jun 08, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Very clear ang explanations. Easy to follow and mga lessons.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Victor</div>
+          <div class="tc-meta"><span class="tc-date">Jun 09, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Great coach. Im only 12 yrs old but I can clearly understand his lessons.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Miraj</div>
+          <div class="tc-meta"><span class="tc-date">Jun 09, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The best training and coach</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Jerome</div>
+          <div class="tc-meta"><span class="tc-date">Jun 09, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I learned about and how to code in Python with the help of my teacher/instructor. Additionally, our lessons also taught me how to read and understand coding in different programming languages.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Stephanie</div>
+          <div class="tc-meta"><span class="tc-date">Jun 09, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">AltSys Academy is highly recommendable, for both professionals and those with no knowledge of coding and programming. Coach Altis Jessie Niño is very approachable if we have our concerns about the lesson. Every topic is well-explained. He also provided us with examples and hands-on exercises to enhance our understanding of every topic. He&#39;s very professional and well-equipped with knowledge. I also appreciate the assistance of Ms. Raiza Pangan in helping coach Altis Jessie Niño answer some inquiries and check the assignments. Thank you AltSys Academy for the great service. The time and money spent is worth it. God bless.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Warren</div>
+          <div class="tc-meta"><span class="tc-date">Jun 09, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">AltSys Academy provided a great learning experience in Python fundamentals. The lessons were clear, beginner-friendly, and well-paced. I was able to understand the concepts easily and felt more confident in coding. I recommend their training to anyone who wants to start learning programming.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Arnelle</div>
+          <div class="tc-meta"><span class="tc-date">Jun 09, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I joined this class to get some insight and a few knowledge about programming, and this session did not disappoint. I learned more that I expected I would in just 10 sessions. Thank you very much for the experience!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">John</div>
+          <div class="tc-meta"><span class="tc-date">Jun 10, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Great way to learn the basics of Python. Very good materials. The recordings and transcripts are good guides in learning</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Efren</div>
+          <div class="tc-meta"><span class="tc-date">Jun 10, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I entered this class without knowing anything about python, and here I am finishing our class with more than just the basics of it. Truly it helped me learn more and inspire me to create some of my own works. Thanks to sir Altis our coach I learned alot.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Matthew</div>
+          <div class="tc-meta"><span class="tc-date">Jun 11, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">These sessions have helped me learn the basics of python coding, it has taught me on which framework I should choose and how to code more efficiently. This has truly been a great experience because of our teacher, Sir Altis.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Chaskiel</div>
+          <div class="tc-meta"><span class="tc-date">Jun 11, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The 10-course Python program was really helpful, It taught me all the basics I needed to start programming, The lessons were easy to understand and great for beginners.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Karl</div>
+          <div class="tc-meta"><span class="tc-date">Jun 12, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I am only 12 years old but got interested in programming because of my parents and, of course, Roblox. This is my first time attending the programming training course, and I am very thrilled!
+
+The course is challenging, with students completing numerous exercises at every level. The hands-on approach guides students to somehow level up or improve their programming from simple to complex. The exercises/homework are well-planned and implemented, providing flexibility for students to implement and optimize their approach. It provides hints that encourage critical thinking and helps students break down difficult problems. I progressed from being a complete beginner to confidently building complex problems with Python. 
+
+The instructors were approachable, patient, and engaging, making the learning process enjoyable and rewarding. I highly recommend Altsys Academy. I am excited for advanced Python courses.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Reybert</div>
+          <div class="tc-meta"><span class="tc-date">Jun 12, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">This helped me a lot from simple codes to complicated ones. It taught me basic lessons and tips to help me when I&#39;m creating my programs.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Manuel</div>
+          <div class="tc-meta"><span class="tc-date">Jun 13, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Coach Altis Jessie Niño Dulay is an amazing teacher. He doesn’t just explain, he makes sure you truly understand. There were times when I really struggled, he quickly message and help me to solve the problems by giving insignt, scenarios, and recall the lssson, it like i am the one debugging the error on my own. His real world examples helped me to fell to be a programmer, not just a coder. Salamat po coach marami po akong natutunan.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Jolito</div>
+          <div class="tc-meta"><span class="tc-date">Jun 14, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I am an upskilling software engineer, although I already know some programming concepts, I was still able to learn new things. I&#39;ve also observed the instructor actively helping everyone&#39;s concerns and are quick to respond to our inquiries. I highly recommend AltSys Academy, especially for beginners.
+
+I will be waiting for more advanced courses in the future.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Roque</div>
+          <div class="tc-meta"><span class="tc-date">Jun 17, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The Fundamentals of Python Programming course greatly helped me in understanding the basic concepts of Python. Although I initially tried to self-learn, this training clarified many topics and gave me the confidence to move on to intermediate lessons. I&#39;m truly grateful for the structured approach and clear explanations</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Bon</div>
+          <div class="tc-meta"><span class="tc-date">Jun 17, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">This Python Programming Fundamentals course has aided me in my preparation for college. This is my first time enrolling in an online course for programming. In addition, prior to my enrollment in this course, I had little experience in coding aside from subjects at grade school and high school. This course and the teacher have met my needs and exceeded my expectations. The teacher was accommodating and proficient at teaching all of the lessons. I have learned so many new topics and skills within my time in this course.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Cullen</div>
+          <div class="tc-meta"><span class="tc-date">Jun 17, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Altsys academy help us to understand Python is a simpler way that hey can explain in lay mans term</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Jacquiline</div>
+          <div class="tc-meta"><span class="tc-date">Jun 21, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I&#39;ll be getting a raise on my job soon as a 19 y/o due to saving hours of human work just by implementing some of what I learned from the course and i&#39;m just getting started, more of this good things will come!
+
+Thank you for your service AltSys Academy!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Alexandrei</div>
+          <div class="tc-meta"><span class="tc-date">Jun 21, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The lessons were easy to understand and really helped me understand the basics of learning to code, the instructors were nice and eager to help the students too</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Torno,</div>
+          <div class="tc-meta"><span class="tc-date">Jul 02, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The tutorials are all good.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Angelica</div>
+          <div class="tc-meta"><span class="tc-date">Sep 22, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Very interesting and ang galing ng nagtuturo</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Ambrocio</div>
+          <div class="tc-meta"><span class="tc-date">Oct 05, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The course was easy to grasp even without prior background in programming. I appreciate and am truly impressed by how Sir Altis breaks down the concepts into simple easy to understand ideas. It shows his mastery and knowledge but most importantly, he cares that everyone in class doesn’t get left behind by reiterating in a different light. All the best and more power to Altsys acadamy! Continue to spark the light of learning in every student and build a brighter future for our rapidly evolving digital world.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Nysa</div>
+          <div class="tc-meta"><span class="tc-date">Oct 05, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Sobrang helpful po nitong lesson na ito para sa mga beginners na walang idea sa basics ng programming languange like python at napakamaasikaso po ni Sir Altis sa mga questions para lang malinawan kami sa mga lessons. Kaya thank you so much sir for making this academy. 😊</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Christine</div>
+          <div class="tc-meta"><span class="tc-date">Oct 05, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">This Python Programming Fundamentals is so informative, you will learn everything there is to know about Python. The teacher here is so kind, encouraging, and very good at teaching. Salamat kyah! Kahit di ako nakakaattend meron akong mababalikan na lesson. You&#39;re the best!!!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Anikhin</div>
+          <div class="tc-meta"><span class="tc-date">Oct 05, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Highly recommended, always! Python was taught in the easiest and most understandable way possible.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Brian</div>
+          <div class="tc-meta"><span class="tc-date">Oct 05, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I&#39;ve always wanted to learn programming, but it felt intimidating, so I kept putting it off. Then I saw an ad on Facebook about the Python Fundamentals course, and I decided to give it a try.
+
+I really like how the course is packed with all the essential information beginners need. Sir Nino Dulay explains the lessons in a simple, easy-to-understand way and is always receptive to our questions. What I appreciate most is how he connects each concept to real-world applications, making it easier to see how programming can be useful in our own fields.
+
+I’d definitely recommend this course to anyone who wants to start learning programming — even if you have no prior experience like me. In fact, I’m already planning to join the next class, SQL Mastery!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Chad</div>
+          <div class="tc-meta"><span class="tc-date">Oct 05, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">As someone with no prior experience on Python, I was nervous about learning to code. The Python Fundamentals course/training not only met but far exceeded my expectations. The lesson is brilliantly structured, each lesson built perfectly on the last, and the real-world examples made the knowledge stick. I now have a solid grasp of core programming concepts and the confidence to automate tasks and analyze data. This course/training provided the exact foundation I needed to advance my career and skills. “Highly recommended! ”</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Jerry</div>
+          <div class="tc-meta"><span class="tc-date">Oct 05, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Sobrang sulit ng 10-session Python Fundamentals webinar with Sir Altis Dulay! Ang galing ng pagkaka-explain—step-by-step, clear, at madaling sundan kahit beginner ka. Every session may practical examples na talagang nakatulong para ma-apply agad ang natutunan. Ramdam mo rin yung passion ni Sir Altis sa pagtuturo—very engaging at approachable. After 10 sessions, confident na ako mag-code in Python. Highly recommended para sa mga gustong matuto ng solid at practical na Python skills!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Mark</div>
+          <div class="tc-meta"><span class="tc-date">Oct 05, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The Python fundamentals course was easy to follow and great for beginners. I learned how to write basic code, understand key concepts, and apply them in real projects. It gave me the confidence to keep learning and exploring programming.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Rogelio</div>
+          <div class="tc-meta"><span class="tc-date">Oct 05, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I learned the basic fundamentals of Python because the lessons were explained clearly and thoroughly. Whenever something was hard to understand, it was explained in more depth until everything made sense. It really helped me build a strong foundation in programming.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Muella,</div>
+          <div class="tc-meta"><span class="tc-date">Oct 07, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Please continues this training, it will help everyone this fundamental this is the stepping stone that will be guide this programming like Python</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Jordan</div>
+          <div class="tc-meta"><span class="tc-date">Oct 08, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The best part in my experience is having experience to have a tutor about programming.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Jomarey</div>
+          <div class="tc-meta"><span class="tc-date">Oct 16, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I learned a lot from this course. Kudos AltSys Academy!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Anthony</div>
+          <div class="tc-meta"><span class="tc-date">Oct 18, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">AltSys Academy has been an excellent place to start my journey in programming. I took both the Java and Python Programming Fundamentals courses, and I was impressed by how well-structured and practical the lessons were. The instructors are not only knowledgeable but also very supportive, ensuring that every student understands the concepts clearly. Thanks to AltSys Academy, I’ve built a strong foundation and gained the confidence to continue learning and growing in this field.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Michael</div>
+          <div class="tc-meta"><span class="tc-date">Oct 19, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">it met my need and expectation for using pythons through visual presentation and feedback</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Lance</div>
+          <div class="tc-meta"><span class="tc-date">Jan 25, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Coaches were knowledgeable with regard to their niches.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Ramil</div>
+          <div class="tc-meta"><span class="tc-date">Feb 27, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I dont have any knowledge about Python, with your help and lectures, I was able to learn from it. Thank you</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Giovannie</div>
+          <div class="tc-meta"><span class="tc-date">Mar 01, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="pf">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">As a beginner in python programming I have learned a lot about the subject. Prof.Nino clearly explained every topic with example and always guide us until we understand the concept.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Joel</div>
+          <div class="tc-meta"><span class="tc-date">Jun 04, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Reasonable fee and approachable coach</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Johann</div>
+          <div class="tc-meta"><span class="tc-date">Apr 06, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Our mentor is very accommodating in entertaining questions beyond our class discussions. They go the extra mile by providing ideas we can incorporate into the real world.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Jacquiline</div>
+          <div class="tc-meta"><span class="tc-date">Apr 06, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Sir Altis is an exceptional instructor—professional, patient, and highly articulate in his teaching approach. Each class is engaging and filled with valuable learning moments, leaving no room for idle time. After completing the bootcamp, I feel much more confident in pursuing a career in Data.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Brian</div>
+          <div class="tc-meta"><span class="tc-date">Apr 06, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The lessons and discussion that they gave is very comprehensive and I understand the lessons and other terminologies. This would be a great advantage for me to pursue my future career and able add up to my knowledge. Great thanks to our coach who helped us and able to teach us as well as their generous support.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Joshua</div>
+          <div class="tc-meta"><span class="tc-date">Apr 06, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I had zero experience with SQL before taking this course, but now I feel like I can build and manage databases with ease! The course covers everything from basic CRUD operations to advanced topics like window functions and integrating Python with MySQL. The step-by-step approach and clear explanations made it easy to follow along, even for a beginner like me. The hands-on project of cloning an Instagram database was a fantastic way to apply everything I learned.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Boyet</div>
+          <div class="tc-meta"><span class="tc-date">Apr 06, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">This ia an added milestone to my career and a life changing experience. Salamuch sa mabait naming mentor!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Bill</div>
+          <div class="tc-meta"><span class="tc-date">Apr 06, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I am delighted with the training conducted by AltSys Academy PH. Examples and explanations helped me understand how the process connects. Make my entire training incredibly satisfying. The trainer is fully equipped with knowledge and experience. NO doubts, NO regrets.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Ruben</div>
+          <div class="tc-meta"><span class="tc-date">Apr 06, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Its a good start if you want to persue a career on data analytics</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Jose</div>
+          <div class="tc-meta"><span class="tc-date">Apr 06, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Class was great, very detailed. A great beginner course!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">John</div>
+          <div class="tc-meta"><span class="tc-date">Apr 06, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Practical exercises after a class provides a good way to retain information and it gauges whether the student really understand the concept or not.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">James</div>
+          <div class="tc-meta"><span class="tc-date">Apr 06, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Clear and easily understood by beginners.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Cesareo</div>
+          <div class="tc-meta"><span class="tc-date">Apr 07, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Great experience! I&#39;ll recommend it to colleagues. I would like to commend Sir Nino for his job well done. We need more people like you</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Efren</div>
+          <div class="tc-meta"><span class="tc-date">Apr 07, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Sobrang informative ng mga lessons. Lahat maiintidihan mo. Step by step pa ang turo.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Jerome</div>
+          <div class="tc-meta"><span class="tc-date">Apr 07, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The lessons and discussions were thorough and engaging, with hands-on exercises that reinforced my understanding of the concepts and terminology. This knowledge will greatly benefit my programming studies, and I am truly grateful for our coach&#39;s generous support.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Christopher</div>
+          <div class="tc-meta"><span class="tc-date">Apr 07, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Easy to understand</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Donna</div>
+          <div class="tc-meta"><span class="tc-date">Apr 07, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">----------------------- Batch 1 MySQL ----------------------- 
+Another 12-Day Sessions with AltSys Academy:
+April 7, 2025
+&quot;Sir Niño has an extensive knowledge of the subject matter. His ability to break down complex ideas into simple, digestible pieces makes learning much easier. He explains each concept clearly, ensuring that even difficult topics are comprehensible. His teaching style is straightforward and approachable, which encourages students to engage and ask questions without hesitation. Overall, his expertise and clear communication skills create an effective and supportive learning environment. Highly recommended!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Marvin</div>
+          <div class="tc-meta"><span class="tc-date">Apr 07, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">This course is truly recommended to those who wants to learn some basic and intermediate knowledelge in sql. legit! proven and tested</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Jerome.ortiz0029@gmail.com</div>
+          <div class="tc-meta"><span class="tc-date">Apr 07, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">This class has been informative and easy to understand. The intructor is well versed with the topic and answers all questions asked. Great job and Thank you.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Carl</div>
+          <div class="tc-meta"><span class="tc-date">Apr 07, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Ang Smooth magturo ni sir Niño at mabait di ka mahihiyang magtanong then madami rin ako natutunan about sa SQL.. Thank you sir Niño,</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Kristian</div>
+          <div class="tc-meta"><span class="tc-date">Apr 07, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Great class! The lessons were clear, engaging, and easy to follow. I learned a lot!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Andre</div>
+          <div class="tc-meta"><span class="tc-date">Apr 08, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The lessons in SQL Mastery are beginner-friendly, and everything is explained step by step. The mentor is super helpful and accommodating.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Joanne</div>
+          <div class="tc-meta"><span class="tc-date">Apr 08, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Very direct and easy to understand po yung lesson, highly recommended sa lahat nang mga aspiring for SQL you will gain a real world application of the course.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Ralph</div>
+          <div class="tc-meta"><span class="tc-date">Apr 09, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Learned so much from SQL Course. Excellent value for the money.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Harold</div>
+          <div class="tc-meta"><span class="tc-date">Apr 09, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Sobrang galing magturo ni sir Niño. He always start teaching the fundamentals and concepts and making sure that every students can grasp the concepts of each codes. Kaya kahit zero knowledge ka sa coding, hindi ka mapang iiwanan kasi sobrang galing nya magturo.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Jayson</div>
+          <div class="tc-meta"><span class="tc-date">Apr 10, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">If I wanted to review SQL for future projects I could just go back to my lifetime access which I cannot get with other tutorials</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Aldrich</div>
+          <div class="tc-meta"><span class="tc-date">Apr 21, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The coach of the course is expert with the subject matter, and is easy to understand. Additionally, the  example queries and activities are practical in real world. Overall, the training is informative and useful, which is what, in my opinion, the current programmers need for fast and better implementation of knowledge.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Wilbert</div>
+          <div class="tc-meta"><span class="tc-date">Apr 27, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The SQL Mastery course at ALtsys Academy exceeded my expectations. The lessons were clear, practical, and well-structured, making complex concepts easy to understand. It enhanced my SQL database knowledge and gave me valuable hands-on experience, which I can now apply directly to my projects. Highly recommended for anyone serious about mastering SQL.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Ronaldo</div>
+          <div class="tc-meta"><span class="tc-date">Aug 10, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">During my time in AltSys Academy, I have learned and honed my skills as an MySQL programmer. I am satisfied with the mastery course as it will help me in the future where databases are used for analysis such as chemical databases.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Carlos</div>
+          <div class="tc-meta"><span class="tc-date">Aug 10, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">This SQL program truly took me from zero to hero. I would gladly recommend it to my friends. Our instructor, Sir Altis, was incredibly accommodating and excelled in explaining each session with clarity and patience.
+
+Kudos to everyone who worked hard to make this program exceptional.
+
+Thank you!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Lovelle</div>
+          <div class="tc-meta"><span class="tc-date">Aug 10, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I really enjoyed this course. The lessons were clear and easy to follow, and the examples made the topics click for me. I’ve picked up skills I can actually use, and I feel a lot more confident now. Definitely worth it!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Euge</div>
+          <div class="tc-meta"><span class="tc-date">Aug 10, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Thank you, I learn a lot, very clear ang discussion and direct to the point, thank you sir Dulay, ang galing mo, more power sa academy,  very accommodating ka din po sa mga query and you try your best to answer our questions the easiest way. God bless po.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Jerry</div>
+          <div class="tc-meta"><span class="tc-date">Aug 10, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">MySQL training exceeded my expectations! The sessions were clear, practical, and engaging, making complex topics easy to understand. I left with the confidence and skills to apply MySQL effectively in real projects. Highly recommended for anyone looking to level up their database knowledge and thanks to Sir Altis.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Mervin</div>
+          <div class="tc-meta"><span class="tc-date">Aug 10, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I learn a lot about sql</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Edilberto</div>
+          <div class="tc-meta"><span class="tc-date">Aug 11, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I highly recommend altsys academy. They make every complex concepts simplified through easily relatable situational examples so it makes learning more fun and enjoyable especially for newbies.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Jeffrey</div>
+          <div class="tc-meta"><span class="tc-date">Aug 11, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The lecture succeeds at both educating and exciting</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Lean</div>
+          <div class="tc-meta"><span class="tc-date">Aug 11, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">These lessons have made me learn the very basics of MySQL and am surprised at how simple it actually is, the lessons taught are easy and understandable for newer people like me who want to learn more and more.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Chaskiel</div>
+          <div class="tc-meta"><span class="tc-date">Aug 11, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Nino explains it very well and is an expert in his field. I recommend this to everyone.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Geo</div>
+          <div class="tc-meta"><span class="tc-date">Aug 12, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The MySQL Mastery online short course at AltSys Academy was an excellent learning experience. The lessons were well-structured, clear, and practical, making even complex database concepts easy to understand. I appreciated the hands-on exercises, which helped me apply what I learned in real-world scenarios. The instructor was knowledgeable and responsive, providing helpful guidance throughout the course. This training boosted my confidence in writing queries, managing databases, and optimizing data workflows. Highly recommended for anyone who wants to strengthen their MySQL skills in a short time!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Anna</div>
+          <div class="tc-meta"><span class="tc-date">Aug 12, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Maayus at maganda ang training, lalo na ang mga activities. Very helpful talaga sa tulad ko na nag start pa lang sa coding.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Jose</div>
+          <div class="tc-meta"><span class="tc-date">Aug 14, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">My expectations were met with great success in this course. not only did i learn basic SQL. i also learned how to use them in real world scenarios, and even simple organizing of data. apart from the fundamentals i also learned to connect it to python enhancing my productivity.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Matthew</div>
+          <div class="tc-meta"><span class="tc-date">Aug 16, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I gained valuable insights and practical knowledge that I can apply in my system review. Training was well-structured, and the concepts were clearly explained, making it easier to grasp even the more advanced topics. I&#39;m grateful to be a part of this learning journey. Thank you Sir.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Florante</div>
+          <div class="tc-meta"><span class="tc-date">Aug 17, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I enrolled in the SQL course and learned at my own pace by watching the recordings. The videos were very easy to follow, and everything was explained clearly. Thank you, Sir Altis Dulay, for helping me become proficient in SQL!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Mark</div>
+          <div class="tc-meta"><span class="tc-date">Oct 20, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I recently completed the SQL Fundamentals Training, and I genuinely loved the entire experience. The lessons were clear, well-structured, and beginner-friendly, making it easy for me to understand even the more complex concepts. I learned so much from writing basic queries to confidently handling real-world data scenarios. This training significantly strengthened my foundation in SQL, and I am motivated to continue improving my data skills.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Michael</div>
+          <div class="tc-meta"><span class="tc-date">Nov 10, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I discover this academy on tiktok by sir Altis. He is teaching live on tiktok about sql and i find out that he also expert on python so I have interest to be part of his course</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Jomarey</div>
+          <div class="tc-meta"><span class="tc-date">Nov 10, 2025</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Tutorial is easy to understand and providing notes to every lessons is a great way to go back and refresh to learn more.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Elizanne</div>
+          <div class="tc-meta"><span class="tc-date">Jan 10, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I had a great learning experience with Altsys Academy. The instructors are not only knowledgeable but also very patient and supportive throughout the learning process. They take the time to explain concepts clearly and make sure students understand before moving on, which makes a big difference, especially when learning technical topics.
+
+What I appreciated most was their willingness to help whenever someone had questions. The environment feels encouraging and beginner-friendly, and you never feel rushed or left behind. Overall, it’s a great place to build your skills and confidence in tech. I’m grateful for the experience and would definitely recommend Altsys Academy to anyone looking to learn in a supportive and professional environment.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Vincent</div>
+          <div class="tc-meta"><span class="tc-date">Mar 07, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Solid si Sir Altis! Pinadali nya yung mga topics na complicated intindihin, very simple explanation , concise and straight to the point! And very considerate din sa mga kagayankong working and studying at the sametime ❤️ thank you!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Ceciline</div>
+          <div class="tc-meta"><span class="tc-date">Mar 14, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I’m super happy that I found this course, it helped me a lot, especially since I’m learning backend development, grabe si sir Altis, the way he explains things is really nice, di siya magp-proceed hanggat may mga questions pa and lahat naman open(di ka mahihiya mag-ask sa class n&#39;ya) I will definitely join his next courses pa, I didn’t regret joining this one at all.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Clarise</div>
+          <div class="tc-meta"><span class="tc-date">Mar 14, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The 14-day SQL Mastery training was very well designed. Having more time compared to a typical 2-day compressed training helped us better understand the concepts and practice SQL more effectively. Thank you for the generous and structured learning experience</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Rei</div>
+          <div class="tc-meta"><span class="tc-date">Mar 14, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Inintay ko talaga itong SQL training ni AltSys. Naging student niya na ako wayback 2024 for PYTHON. Tas inabangan ko yung chance na makajoin din ako sa SQL training. Nagabang pa ako ng me weekends kasi yung mga naunang batch ay di akma sa schedule ko. Luckily, nakajoin ako sa Batch 4 SQL training. Super recommended ko rin talaga ito dahil super beginner-friendly yung teaching manner niya ang he ensures na matuto kami and very open siya sa mga questions namin and actually hinihikayat niya kami na magtanong talaga ng mga scenario or usage na naiisip namin. Also, may mga assignments din kami that help us practice. Nakakatuwa matuto kung pano itong SQL nang from ZERO to CRUD to ORDER BY to GROUP BY to JOIN. At malaman na mostly combine din siya ng usage with PYTHON. Ganan. Hehe. Thank you so much for AltSys. Looking forward na makajoin pa ako sa ibang mga classes na iooffer for me to improve my skills.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Julie</div>
+          <div class="tc-meta"><span class="tc-date">Mar 14, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I learned so much from this training.. Thank you vary much!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Marco</div>
+          <div class="tc-meta"><span class="tc-date">Mar 14, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Unlocking new levels… Big Thanks po sir Altis you are more than a teacher, a true mentor.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Rico</div>
+          <div class="tc-meta"><span class="tc-date">Mar 15, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The teacher makes sure we truly learn and understand the lessons, which I appreciate a lot. Even though I haven’t been able to attend much because of my work, I really appreciate that the teacher always shares updates and makes sure the recorded lessons are available. It helps us keep up and not miss out. Highly recommended!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Katherine</div>
+          <div class="tc-meta"><span class="tc-date">Mar 16, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Easy to understand and the instructor is accomodating especially for beginners</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Nicole</div>
+          <div class="tc-meta"><span class="tc-date">Mar 16, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Nice class, step by step but comprehensive.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Vernadette</div>
+          <div class="tc-meta"><span class="tc-date">Jun 05, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The SQL course was well-structured, easy to follow, and packed with practical examples. It helped me build a solid foundation in SQL and improved my confidence in working with databases. Highly recommended for beginners and professionals looking to enhance their data skills</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Jenny</div>
+          <div class="tc-meta"><span class="tc-date">Jun 05, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">This is a pretty great course. Short but concise, Professor knows what he&#39;s teaching, provides study materials for future uses, lets students ask questions and answer accordingly. Great stuff you love to see. They also provide session discounts for people willing to join early, so its absolutely worth the money.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Blythe</div>
+          <div class="tc-meta"><span class="tc-date">Jun 05, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Learned a lot about mysql. All the topics covered are fundamentally important in sql.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Michael</div>
+          <div class="tc-meta"><span class="tc-date">Jun 05, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Thank you for the learnings. Thank you Sir Altis for making every lesson fun and easy to deal with.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Vienne</div>
+          <div class="tc-meta"><span class="tc-date">Jun 05, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Super ganda! I learned a lot, and it sparked my curiosity even more. Dahil dyan, I plan to continue exploring not only SQL but also other tools and concepts in data analytics and technology. Thanks Sir Nino and AltSys Academy!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Mark</div>
+          <div class="tc-meta"><span class="tc-date">Jun 05, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The course is very easy to follow, and the instructor delivers each session with clarity and confidence.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Emmanuel</div>
+          <div class="tc-meta"><span class="tc-date">Jun 05, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">I learned so much from this training.  Thank you  Sir Altis and  Ma&#39;am Raiza</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Maria</div>
+          <div class="tc-meta"><span class="tc-date">Jun 05, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">+1 Delighted Customer. 
+
+Instructor explains complex concepts in a beginner-friendly, digestible, and easy-to-follow manner.  Instructor also encourages class participation with homeworks, Q&amp;A, and some practical applications with examples. Highly recommend this course to anyone. (5 stars)</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Shalimar</div>
+          <div class="tc-meta"><span class="tc-date">Jun 05, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">My SQL learning journey has been both rewarding and practical. The lessons were clear, well-structured, and easy to apply to real-world scenarios. I gained valuable skills in writing queries, managing data, and understanding databases, which exceeded my expectations. I highly recommend this learning experience to anyone looking to build or strengthen their SQL knowledge. Thank you Sir Altis!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Sarah</div>
+          <div class="tc-meta"><span class="tc-date">Jun 05, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Great service, fast response, and very professional. Highly recommended!</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Wilkinz</div>
+          <div class="tc-meta"><span class="tc-date">Jun 06, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">The instructor has extensive knowledge and experience in the field of programming, and demonstrates an effective teaching approach that is easy to follow. They are also patient in addressing questions and clarifying any queries</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Christopher</div>
+          <div class="tc-meta"><span class="tc-date">Jun 06, 2026</span></div>
+        </div>
+      </div>
+      <div class="tc" data-course="sql">
+        <div>
+          <div class="tc-mark">"</div>
+          <p class="tc-quote">Highly recommended, lessons are well organized and easy to follow and instructor is also approachable.</p>
+        </div>
+        <div class="tc-footer">
+          <div class="tc-name">Hezeil</div>
+          <div class="tc-meta"><span class="tc-date">Jun 06, 2026</span></div>
+        </div>
+      </div>
+      <div class="tgrid-fade"></div>
+    </div>
+    <button class="tgrid-toggle" id="tgrid-btn" onclick="toggleTestimonials()">Show All Testimonials ↓</button>
   </div>
 </div>
 
@@ -580,7 +2202,7 @@ footer .container { display: flex; justify-content: center; align-items: center;
 <div id="about" class="section">
   <div class="container">
     <div class="section-header reveal">
-      <div class="s-num">03</div>
+      <div class="s-num">05</div>
       <h2 class="s-title">About <em>Me</em></h2>
     </div>
     <div class="about-grid">
@@ -617,9 +2239,9 @@ footer .container { display: flex; justify-content: center; align-items: center;
 <div id="contact" class="section section-dark">
   <div class="container">
     <div class="contact-inner">
-      <div class="c-eyebrow">04 — Let's Work Together</div>
+      <div class="c-eyebrow">06 — Let's Work Together</div>
       <h2 class="c-heading">Got a process<br>worth <em>automating?</em></h2>
-      <a href="mailto:altisjessienino18@gmail.com" class="c-btn">Get In Touch</a>
+      <a href="mailto:yourname@email.com" class="c-btn">Get In Touch</a>
     </div>
   </div>
 </div>
@@ -630,6 +2252,17 @@ footer .container { display: flex; justify-content: center; align-items: center;
     <span class="footer-copy">© 2025 Altis Jessie Niño Dulay · AltSys Learning Center</span>
   </div>
 </footer>
+
+
+<!-- STICKY SECTION DOTS -->
+<div class="section-dots" id="sectionDots">
+  <a class="s-dot active" data-section="hero" title="Home" href="#"></a>
+  <a class="s-dot" data-section="projects" title="Projects" href="#projects"></a>
+  <a class="s-dot" data-section="academy" title="AltSys Academy" href="#academy"></a>
+  <a class="s-dot" data-section="testimonials" title="Testimonials" href="#testimonials"></a>
+  <a class="s-dot" data-section="about" title="About" href="#about"></a>
+  <a class="s-dot" data-section="contact" title="Contact" href="#contact"></a>
+</div>
 
 <script>
   // Scroll reveal
@@ -656,6 +2289,87 @@ footer .container { display: flex; justify-content: center; align-items: center;
       menu.classList.remove('open');
     });
   });
+
+  // Active nav + sticky dots
+  const sections = [
+    { id: 'hero',     el: document.querySelector('.hero') },
+    { id: 'projects', el: document.getElementById('projects') },
+    { id: 'academy',  el: document.getElementById('academy') },
+    { id: 'testimonials', el: document.getElementById('testimonials') },
+    { id: 'about',    el: document.getElementById('about') },
+    { id: 'contact',  el: document.getElementById('contact') },
+  ];
+  const navLinks = document.querySelectorAll('.nav-links a');
+  const dots = document.querySelectorAll('.s-dot');
+
+  function setActive(id) {
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + id || (id === 'hero' && a.getAttribute('href') === '#'));
+    });
+    dots.forEach(d => d.classList.toggle('active', d.dataset.section === id));
+  }
+
+  const ioNav = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) setActive(e.target.id || 'hero'); });
+  }, { threshold: 0.3 });
+
+  sections.forEach(s => { if (s.el) ioNav.observe(s.el); });
+
+
+
+  // Testimonials toggle
+  // Set initial collapsed height = first 3 rows
+  function collapseGrid() {
+    const grid = document.getElementById('tgrid');
+    const cards = grid.querySelectorAll('.tc');
+    if (!cards.length) return;
+    // Find the bottom of the 3rd row by getting the offset of the card
+    // that would be the last in row 3 based on computed columns
+    const gridStyle = window.getComputedStyle(grid);
+    const cols = gridStyle.gridTemplateColumns.split(' ').length;
+    const rowSize = Math.min(cols * 3, cards.length);
+    const thirdRowCard = cards[rowSize - 1];
+    const gridTop = grid.getBoundingClientRect().top + window.scrollY;
+    const cardBottom = thirdRowCard.getBoundingClientRect().bottom + window.scrollY;
+    const height = cardBottom - gridTop + 60; // +60 for fade
+    grid.style.maxHeight = height + 'px';
+  }
+  // Run after a short delay to let cards render
+  setTimeout(collapseGrid, 100);
+  window.addEventListener('resize', () => {
+    if (!document.getElementById('tgrid').classList.contains('expanded')) collapseGrid();
+  });
+
+  function toggleTestimonials() {
+    const grid = document.getElementById('tgrid');
+    const btn  = document.getElementById('tgrid-btn');
+    const open = grid.classList.toggle('expanded');
+    if (open) {
+      grid.style.maxHeight = 'none';
+      btn.textContent = 'Show Less ↑';
+    } else {
+      collapseGrid();
+      btn.textContent = 'Show All Testimonials ↓';
+    }
+  }
+
+  // Testimonials filter
+  let activeFilter = 'all';
+  function filterTestimonials(btn) {
+    activeFilter = btn.dataset.filter;
+    document.querySelectorAll('.tf').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.tc').forEach(card => {
+      const show = activeFilter === 'all' || card.dataset.course === activeFilter;
+      card.style.display = show ? '' : 'none';
+    });
+    // Collapse back when switching
+    const grid = document.getElementById('tgrid');
+    const toggleBtn = document.getElementById('tgrid-btn');
+    grid.classList.remove('expanded');
+    toggleBtn.textContent = 'Show All Testimonials ↓';
+  }
+
 </script>
 </body>
 </html>
